@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 Kidney Health Initiative</title>
+    <title>Research Portfolio: Beverage & Kidney 2026</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Marked.js (Markdown parsing) -->
+    <!-- Marked.js -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <!-- Animate.css -->
@@ -20,14 +20,14 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
-    <!-- 폰트 (Pretendard) -->
+    <!-- Font: Pretendard -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
 
     <style>
         body {
             font-family: 'Pretendard', sans-serif;
-            background-color: #0B1120; /* Deep Navy */
-            color: #E2E8F0;
+            background-color: #0F172A; /* Slate 900 */
+            color: #F1F5F9;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -35,43 +35,35 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Glassmorphism Panel */
+        /* Glassmorphism Logic */
+        .glass-base {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
         .glass-panel {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            @apply glass-base rounded-2xl;
         }
         
         .glass-header {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .chart-container {
-            position: relative;
-            height: 250px;
-            width: 100%;
+        .gradient-text {
+            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Particle Canvas */
         #particle-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
         }
         
         .typing-dot {
@@ -85,142 +77,185 @@
 </head>
 <body class="antialiased selection:bg-indigo-500 selection:text-white pb-24 relative">
 
-    <!-- Particle Effect Canvas -->
     <canvas id="particle-canvas"></canvas>
 
-    <!-- 네비게이션 -->
+    <!-- Navigation -->
     <nav class="sticky top-0 z-50 glass-header">
-        <div class="max-w-4xl mx-auto px-6 py-4">
+        <div class="max-w-5xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="bg-indigo-600/20 p-2 rounded-lg border border-indigo-500/30">
-                        <i class="ph-fill ph-dna text-2xl text-indigo-400"></i>
+                    <div class="bg-indigo-500/10 p-2 rounded-lg border border-indigo-500/20">
+                        <i class="ph-fill ph-student text-2xl text-indigo-400"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold text-white text-lg leading-none tracking-tight">2026 Kidney Health</h1>
-                        <p class="text-[10px] text-slate-400 mt-1 font-medium tracking-wide uppercase">Evidence-Based Research Lab</p>
+                        <h1 class="font-bold text-white text-lg leading-none tracking-tight">Haneulssi's Lab</h1>
+                        <p class="text-[10px] text-slate-400 mt-1 font-medium tracking-wide uppercase">Nutritional Epidemiology • 2026 Portfolio</p>
                     </div>
                 </div>
-                <!-- DB Status Indicator -->
-                <div id="db-status" class="text-[10px] text-slate-400 bg-slate-800/50 border border-white/5 px-3 py-1.5 rounded-full flex items-center gap-2 font-bold transition-all hover:bg-slate-800 cursor-help">
-                    <span class="w-1.5 h-1.5 bg-slate-500 rounded-full"></span> System Ready
+                <!-- Status -->
+                <div id="db-status" class="text-[10px] text-emerald-400 bg-emerald-900/20 border border-emerald-500/20 px-3 py-1.5 rounded-full flex items-center gap-2 font-bold cursor-help transition-all hover:bg-emerald-900/30">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Online
                 </div>
             </div>
-            <!-- 탭 메뉴 -->
+            <!-- Tabs -->
             <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1 mt-4 border-t border-white/5 pt-3">
-                <a href="#dashboard" class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-indigo-600/20 border border-indigo-500/30 rounded-lg hover:bg-indigo-600/30 transition">
-                    <i class="ph-bold ph-chart-bar"></i> Dashboard
+                <a href="#abstract" class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-indigo-600/20 border border-indigo-500/30 rounded-lg hover:bg-indigo-600/30 transition">
+                    <i class="ph-bold ph-article"></i> Abstract
                 </a>
-                <a href="#lab" class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/5 rounded-lg hover:bg-white/10 transition">
+                <a href="#methodology" class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/5 rounded-lg hover:bg-white/10 transition">
+                    <i class="ph-bold ph-graph"></i> Methods
+                </a>
+                <a href="#results" class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/5 rounded-lg hover:bg-white/10 transition">
+                    <i class="ph-bold ph-chart-line-up"></i> Results
+                </a>
+                <a href="#simulator" class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/5 rounded-lg hover:bg-white/10 transition">
                     <i class="ph-bold ph-flask"></i> Simulator
-                </a>
-                <a href="#chat" class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/5 rounded-lg hover:bg-white/10 transition">
-                    <i class="ph-bold ph-chat-centered-text"></i> AI Researcher
                 </a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 py-8 space-y-8 relative z-10">
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12 relative z-10">
 
-        <!-- 섹션 1: Insight Dashboard (New) -->
-        <section id="dashboard" class="space-y-6">
-            <div class="glass-panel p-8 relative overflow-hidden group">
-                <div class="absolute -top-20 -right-20 w-80 h-80 bg-indigo-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <!-- 1. Abstract / Research Overview -->
+        <section id="abstract" class="space-y-6 animate__animated animate__fadeIn">
+            <div class="glass-panel p-8 relative overflow-hidden">
+                <!-- Background Accent -->
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-[80px]"></div>
                 
                 <div class="relative z-10">
                     <div class="flex items-center gap-2 mb-4">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">KEY FINDINGS</span>
-                        <span class="text-xs text-slate-400">Based on KoGES & UK Biobank Data</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">ORIGINAL RESEARCH</span>
+                        <span class="text-xs text-slate-400">Based on Research Notes (Sep 2025 - Jan 2026)</span>
                     </div>
-                    <h2 class="text-3xl font-extrabold mb-4 leading-tight">
-                        Coffee Intake & <br>
-                        <span class="gradient-text">Kidney Function (eGFR)</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
+                        Association between <span class="gradient-text">Beverage Consumption</span><br>
+                        and Kidney Function in Korean Adults
                     </h2>
-                    <p class="text-slate-300 text-sm leading-relaxed max-w-2xl mb-6">
-                        최근 연구(Jhee et al., Tang et al.)에 따르면, 하루 1~2잔의 커피 섭취는 만성콩팥병(CKD) 발생 위험을 낮출 수 있습니다. 
-                        특히 당뇨병 환자군(Kim et al.)에서도 적절한 커피 섭취는 신장 기능 보존과 연관성이 관찰되었습니다.
-                    </p>
-                    
-                    <div class="grid md:grid-cols-2 gap-6 mt-8">
-                        <!-- Chart 1: Risk Hazard Ratio -->
-                        <div class="bg-slate-900/40 rounded-xl p-5 border border-white/5">
-                            <h3 class="text-xs font-bold text-slate-300 mb-4 flex items-center gap-2">
-                                <i class="ph-fill ph-trend-down text-emerald-400"></i> Relative Risk of Incident CKD
-                            </h3>
-                            <div class="chart-container">
-                                <canvas id="riskChart"></canvas>
-                            </div>
-                            <p class="text-[10px] text-slate-500 mt-3 text-right">Data Source: Jhee et al. (KoGES Cohort)</p>
+                    <div class="grid md:grid-cols-3 gap-6 text-sm text-slate-300 border-t border-white/10 pt-6">
+                        <div>
+                            <h3 class="text-indigo-400 font-bold mb-2 text-xs uppercase tracking-wider">Objective</h3>
+                            <p class="leading-relaxed text-xs">한국 성인의 음료 섭취 패턴(커피, 차, 가당음료)이 신장 기능(eGFR)에 미치는 영향을 규명하고, 특히 믹스커피와 블랙커피의 차별적 효과를 분석함.</p>
                         </div>
-
-                        <!-- Chart 2: eGFR Trend -->
-                        <div class="bg-slate-900/40 rounded-xl p-5 border border-white/5">
-                            <h3 class="text-xs font-bold text-slate-300 mb-4 flex items-center gap-2">
-                                <i class="ph-fill ph-chart-line-up text-indigo-400"></i> Projected Benefit (Simulation)
-                            </h3>
-                            <div class="chart-container">
-                                <canvas id="trendChart"></canvas>
-                            </div>
-                             <p class="text-[10px] text-slate-500 mt-3 text-right">Simulated based on diabetic subgroup analysis</p>
+                        <div>
+                            <h3 class="text-indigo-400 font-bold mb-2 text-xs uppercase tracking-wider">Methods</h3>
+                            <p class="leading-relaxed text-xs">제9기 국민건강영양조사(2022-2024) 데이터 활용. CKD-EPI 공식을 이용한 eGFR 산출. 다중회귀분석 및 층화분석 실시.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-indigo-400 font-bold mb-2 text-xs uppercase tracking-wider">Implication</h3>
+                            <p class="leading-relaxed text-xs">당뇨병 등 고위험군을 위한 맞춤형 음료 섭취 가이드라인 제시에 기여. 공중보건학적 근거 마련.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-panel p-4 flex flex-col items-center text-center hover:bg-white/5 transition">
-                    <i class="ph-duotone ph-drop text-2xl text-sky-400 mb-2"></i>
-                    <span class="text-xs font-bold text-slate-300">Hydration</span>
-                    <span class="text-[10px] text-slate-500 mt-1">이뇨작용은 일시적</span>
-                </div>
-                <div class="glass-panel p-4 flex flex-col items-center text-center hover:bg-white/5 transition">
-                    <i class="ph-duotone ph-plant text-2xl text-emerald-400 mb-2"></i>
-                    <span class="text-xs font-bold text-slate-300">Antioxidant</span>
-                    <span class="text-[10px] text-slate-500 mt-1">Chlorogenic Acid</span>
-                </div>
-                <div class="glass-panel p-4 flex flex-col items-center text-center hover:bg-white/5 transition">
-                    <i class="ph-duotone ph-warning text-2xl text-amber-400 mb-2"></i>
-                    <span class="text-xs font-bold text-slate-300">Additives</span>
-                    <span class="text-[10px] text-slate-500 mt-1">Sugar & Creamer Risk</span>
-                </div>
-                <div class="glass-panel p-4 flex flex-col items-center text-center hover:bg-white/5 transition">
-                    <i class="ph-duotone ph-heartbeat text-2xl text-rose-400 mb-2"></i>
-                    <span class="text-xs font-bold text-slate-300">Diabetes</span>
-                    <span class="text-[10px] text-slate-500 mt-1">Monitor Intake</span>
                 </div>
             </div>
         </section>
 
-        <!-- 섹션 2: 신장 지키기 시뮬레이터 (Refined) -->
-        <section id="lab" class="glass-panel p-6 relative">
+        <!-- 2. Methodology (Visualized) -->
+        <section id="methodology" class="space-y-4">
+            <div class="flex items-center justify-between px-2">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="ph-fill ph-git-merge text-emerald-400"></i> Study Design Framework
+                </h3>
+                <span class="text-[10px] text-slate-500">Ref: Jan 2026 Note</span>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Data Source -->
+                <div class="glass-panel p-5 border-l-4 border-l-indigo-500 hover:bg-white/5 transition">
+                    <div class="text-2xl mb-2">📊</div>
+                    <h4 class="font-bold text-slate-200 text-sm">Data Source</h4>
+                    <p class="text-xs text-slate-400 mt-1">KNHANES IX (2022-2024)</p>
+                    <p class="text-[10px] text-slate-500 mt-2">N ≈ 15,000 (Expected)</p>
+                </div>
+                
+                <!-- Inclusion/Exclusion -->
+                <div class="glass-panel p-5 border-l-4 border-l-amber-500 hover:bg-white/5 transition">
+                    <div class="text-2xl mb-2">👥</div>
+                    <h4 class="font-bold text-slate-200 text-sm">Participants</h4>
+                    <ul class="text-xs text-slate-400 mt-2 space-y-1 list-disc pl-3">
+                        <li>Aged 19-64 years</li>
+                        <li>Excluded: Cancer, CVD history</li>
+                        <li>Excluded: Missing eGFR/FFQ data</li>
+                    </ul>
+                </div>
+                
+                <!-- Variables -->
+                <div class="glass-panel p-5 border-l-4 border-l-rose-500 hover:bg-white/5 transition">
+                    <div class="text-2xl mb-2">📐</div>
+                    <h4 class="font-bold text-slate-200 text-sm">Key Variables</h4>
+                    <ul class="text-xs text-slate-400 mt-2 space-y-1">
+                        <li><strong class="text-slate-300">Exp:</strong> Coffee type (Black/Mix), Tea, SSB</li>
+                        <li><strong class="text-slate-300">Out:</strong> eGFR (CKD-EPI 2021)</li>
+                        <li><strong class="text-slate-300">Con:</strong> BMI, Smoking, HTN, DM</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Results / Hypothesis Visualization -->
+        <section id="results" class="grid md:grid-cols-2 gap-6">
+            <!-- Chart 1: Coffee Type Impact -->
+            <div class="glass-panel p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="ph-fill ph-chart-bar text-sky-400"></i> Differential Effects by Coffee Type
+                    </h3>
+                    <div class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">Hypothesis Model</div>
+                </div>
+                <div class="h-[250px] w-full">
+                    <canvas id="coffeeTypeChart"></canvas>
+                </div>
+                <p class="text-[10px] text-slate-500 mt-3">
+                    *블랙커피는 eGFR 감소 위험을 낮추는 반면(Protective), 믹스커피는 당분/프림으로 인해 위험을 높일 것(Risk Factor)으로 가설 설정 (Dec 2025 Note).
+                </p>
+            </div>
+
+            <!-- Chart 2: Mechanism (Tea Timing) -->
+            <div class="glass-panel p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="ph-fill ph-clock-user text-emerald-400"></i> Circadian Rhythm & Tea Intake
+                    </h3>
+                    <div class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">Mechanism</div>
+                </div>
+                <div class="h-[250px] w-full">
+                    <canvas id="teaTimingChart"></canvas>
+                </div>
+                <p class="text-[10px] text-slate-500 mt-3">
+                    *오전 시간대(Dawn-Noon) 차 섭취가 신장 대사 리듬과 일치하여 eGFR 유지에 가장 긍정적일 것으로 예상 (Nov 2025 Note).
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. Interactive Simulator -->
+        <section id="simulator" class="glass-panel p-6 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
+            
             <div class="flex items-center justify-between mb-6">
                 <div>
                     <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="ph-fill ph-flask text-indigo-400"></i> Intake Simulator
+                        <i class="ph-fill ph-game-controller text-indigo-400"></i> Public Health Intervention Model
                     </h2>
-                    <p class="text-slate-500 text-xs mt-1">실시간 섭취 시뮬레이션 및 상태 모니터링</p>
+                    <p class="text-slate-500 text-xs mt-1">Simulating eGFR response to daily beverage choices</p>
                 </div>
                 <button onclick="window.resetDrinks()" class="text-[10px] font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-white/10 transition flex items-center gap-1">
-                    <i class="ph-bold ph-arrow-counter-clockwise"></i> Reset
+                    <i class="ph-bold ph-arrow-counter-clockwise"></i> Reset Model
                 </button>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 items-center">
-                <!-- Avatar Display -->
-                <div class="flex flex-col items-center justify-center p-6 bg-gradient-to-b from-slate-800/50 to-slate-900/50 rounded-2xl border border-white/5 relative">
-                     <!-- Animation Target -->
+                <!-- Visual Feedback -->
+                <div class="flex flex-col items-center justify-center p-6 bg-slate-900/50 rounded-2xl border border-white/5 relative">
                     <div class="relative mb-6">
-                        <div id="kidney-char" class="text-[100px] transition-all duration-300 drop-shadow-2xl filter hover:brightness-110 cursor-pointer" onclick="window.pokeKidney()">🫘</div>
-                        <!-- Status Badge -->
+                        <div id="kidney-char" class="text-[100px] transition-all duration-300 drop-shadow-2xl filter hover:brightness-110 cursor-pointer select-none" onclick="window.pokeKidney()">🫘</div>
                         <div id="status-badge" class="absolute -top-2 -right-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-bounce">
-                            Healthy
+                            Optimal
                         </div>
                     </div>
                     
                     <div class="w-full space-y-2">
                         <div class="flex justify-between text-xs font-medium text-slate-400">
-                            <span>Condition</span>
+                            <span>Predicted Condition</span>
                             <span id="score-val">100%</span>
                         </div>
                         <div class="w-full bg-slate-950 rounded-full h-3 overflow-hidden border border-white/5">
@@ -232,92 +267,84 @@
                     </div>
                 </div>
 
-                <!-- Controls -->
+                <!-- Intervention Controls -->
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-3">
-                        <button onclick="window.addDrink('tea')" class="group bg-slate-800/50 hover:bg-emerald-900/20 border border-white/5 hover:border-emerald-500/30 p-3 rounded-xl transition-all text-left relative overflow-hidden">
-                            <div class="absolute right-2 top-2 opacity-10 group-hover:opacity-100 transition-opacity">
-                                <i class="ph-duotone ph-plus-circle text-emerald-400 text-lg"></i>
-                            </div>
+                        <button onclick="window.addDrink('tea')" class="group bg-emerald-900/10 hover:bg-emerald-900/30 border border-emerald-500/20 hover:border-emerald-500/40 p-3 rounded-xl transition-all text-left relative overflow-hidden">
                             <span class="text-2xl block mb-1">🍵</span>
-                            <div class="text-xs font-bold text-slate-200">Tea (Green/Black)</div>
-                            <div class="text-[10px] text-emerald-400">+3 pts (Polyphenols)</div>
+                            <div class="text-xs font-bold text-slate-200">Green/Black Tea</div>
+                            <div class="text-[10px] text-emerald-400 font-medium">+3 (Polyphenols)</div>
                             <span id="count-tea" class="absolute bottom-2 right-2 text-[10px] font-mono text-slate-500">0</span>
                         </button>
 
-                        <button onclick="window.addDrink('black')" class="group bg-slate-800/50 hover:bg-indigo-900/20 border border-white/5 hover:border-indigo-500/30 p-3 rounded-xl transition-all text-left relative overflow-hidden">
-                            <div class="absolute right-2 top-2 opacity-10 group-hover:opacity-100 transition-opacity">
-                                <i class="ph-duotone ph-plus-circle text-indigo-400 text-lg"></i>
-                            </div>
+                        <button onclick="window.addDrink('black')" class="group bg-indigo-900/10 hover:bg-indigo-900/30 border border-indigo-500/20 hover:border-indigo-500/40 p-3 rounded-xl transition-all text-left relative overflow-hidden">
                             <span class="text-2xl block mb-1">☕</span>
                             <div class="text-xs font-bold text-slate-200">Black Coffee</div>
-                            <div class="text-[10px] text-slate-400">+2 pts (Moderate)</div>
+                            <div class="text-[10px] text-indigo-400 font-medium">+2 (Antioxidants)</div>
                             <span id="count-black" class="absolute bottom-2 right-2 text-[10px] font-mono text-slate-500">0</span>
                         </button>
 
-                        <button onclick="window.addDrink('mix')" class="group bg-slate-800/50 hover:bg-amber-900/20 border border-white/5 hover:border-amber-500/30 p-3 rounded-xl transition-all text-left relative overflow-hidden">
-                            <div class="absolute right-2 top-2 opacity-10 group-hover:opacity-100 transition-opacity">
-                                <i class="ph-duotone ph-minus-circle text-amber-400 text-lg"></i>
-                            </div>
+                        <button onclick="window.addDrink('mix')" class="group bg-amber-900/10 hover:bg-amber-900/30 border border-amber-500/20 hover:border-amber-500/40 p-3 rounded-xl transition-all text-left relative overflow-hidden">
                             <span class="text-2xl block mb-1">🍬</span>
                             <div class="text-xs font-bold text-slate-200">Mix Coffee</div>
-                            <div class="text-[10px] text-amber-400">-5 pts (Sugar/Fat)</div>
+                            <div class="text-[10px] text-amber-500 font-medium">-5 (Sugar/Fat)</div>
                             <span id="count-mix" class="absolute bottom-2 right-2 text-[10px] font-mono text-slate-500">0</span>
                         </button>
 
-                        <button onclick="window.addDrink('ssb')" class="group bg-slate-800/50 hover:bg-rose-900/20 border border-white/5 hover:border-rose-500/30 p-3 rounded-xl transition-all text-left relative overflow-hidden">
-                            <div class="absolute right-2 top-2 opacity-10 group-hover:opacity-100 transition-opacity">
-                                <i class="ph-duotone ph-minus-circle text-rose-400 text-lg"></i>
-                            </div>
+                        <button onclick="window.addDrink('ssb')" class="group bg-rose-900/10 hover:bg-rose-900/30 border border-rose-500/20 hover:border-rose-500/40 p-3 rounded-xl transition-all text-left relative overflow-hidden">
                             <span class="text-2xl block mb-1">🥤</span>
-                            <div class="text-xs font-bold text-slate-200">Sweetened Bev</div>
-                            <div class="text-[10px] text-rose-400">-10 pts (High Fructose)</div>
+                            <div class="text-xs font-bold text-slate-200">SSB (Soda/Juice)</div>
+                            <div class="text-[10px] text-rose-500 font-medium">-10 (Fructose)</div>
                             <span id="count-ssb" class="absolute bottom-2 right-2 text-[10px] font-mono text-slate-500">0</span>
                         </button>
                     </div>
 
-                    <label class="flex items-center gap-3 p-3 bg-slate-900/40 rounded-xl border border-white/5 cursor-pointer hover:border-indigo-500/30 transition group">
+                    <label class="flex items-center gap-3 p-3 bg-slate-900/40 rounded-xl border border-white/5 cursor-pointer hover:border-indigo-500/30 transition group select-none">
                         <div class="relative flex items-center">
                             <input type="checkbox" id="check-diabetes" class="peer sr-only" onchange="window.updateKidneyStatus()">
-                            <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+                            <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-rose-600"></div>
                         </div>
-                        <span class="text-xs text-slate-400 group-hover:text-slate-200 transition">Diabetic Condition (Risk Factor)</span>
+                        <span class="text-xs text-slate-400 group-hover:text-slate-200 transition">Comorbidity: Diabetes (High Risk)</span>
                     </label>
                 </div>
             </div>
         </section>
 
-        <!-- 섹션 3: AI Researcher -->
+        <!-- 5. AI Research Assistant -->
         <section id="chat" class="glass-panel flex flex-col h-[600px] overflow-hidden">
             <div class="p-5 border-b border-white/5 flex justify-between items-center bg-slate-900/30">
                 <div class="flex items-center gap-3">
                     <div class="relative">
-                        <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full absolute -right-0.5 -bottom-0.5 border-2 border-slate-900 animate-pulse"></div>
-                        <span class="text-3xl">👩‍🔬</span>
+                        <div class="w-2.5 h-2.5 bg-indigo-500 rounded-full absolute -right-0.5 -bottom-0.5 border-2 border-slate-900 animate-pulse"></div>
+                        <span class="text-3xl">🧑‍💻</span>
                     </div>
                     <div>
-                        <span class="font-bold text-white text-sm block">Dr. Haneulssi (AI)</span>
-                        <span class="text-[10px] text-indigo-400 block font-medium">Research Assistant</span>
+                        <span class="font-bold text-white text-sm block">Researcher Cho (AI Assistant)</span>
+                        <span class="text-[10px] text-indigo-400 block font-medium">Research Notes (Sep '25 - Jan '26) Loaded</span>
                     </div>
                 </div>
                 <div class="flex gap-2">
-                     <span class="text-[10px] text-slate-500 border border-white/5 px-2 py-1 rounded">v2.4.0</span>
+                     <span class="text-[10px] text-slate-500 border border-white/5 px-2 py-1 rounded">Interactive</span>
                 </div>
             </div>
             
             <div id="chat-window" class="flex-1 p-5 overflow-y-auto space-y-6 bg-transparent scroll-smooth">
                 <div class="flex gap-4 animate__animated animate__fadeIn">
-                    <div class="flex-shrink-0 w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center border border-white/10 text-lg">👩‍🔬</div>
+                    <div class="flex-shrink-0 w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center border border-white/10 text-lg">🧑‍💻</div>
                     <div class="bg-slate-800/60 backdrop-blur-sm p-4 rounded-2xl rounded-tl-none border border-white/5 text-sm text-slate-200 max-w-[85%] chat-content shadow-sm">
-                        안녕하세요. <strong>2026 Kidney Health Initiative</strong>에 오신 것을 환영합니다.<br><br>
-                        업로드해주신 최신 연구 논문(Jhee et al., Tang et al., Kim et al.) 데이터를 학습했습니다. 커피 섭취와 eGFR 변화, 당뇨 환자군에서의 영향 등에 대해 질문해주시면 분석 결과를 바탕으로 답변 드리겠습니다.
+                        안녕하세요! 조하늘 연구원님의 <strong>9월~1월 연구노트</strong>를 기반으로 분석 준비를 마쳤습니다.<br><br>
+                        주요 학습 내용:<br>
+                        - KNHANES 9기 데이터 활용 계획<br>
+                        - 믹스커피의 위해성 vs 블랙커피의 이점<br>
+                        - 차 섭취 시간(오전)과 신장 기능의 상관관계<br><br>
+                        논문 작성에 필요한 구체적인 내용을 질문해주세요.
                     </div>
                 </div>
             </div>
             
             <div class="p-4 bg-slate-900/50 border-t border-white/5">
                 <div class="relative">
-                    <input type="text" id="chat-input" placeholder="Type your research question here..." class="w-full bg-slate-950/50 border border-slate-700 text-white rounded-xl pl-4 pr-12 py-3.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none placeholder-slate-600">
+                    <input type="text" id="chat-input" placeholder="Ask about research methodology or results..." class="w-full bg-slate-950/50 border border-slate-700 text-white rounded-xl pl-4 pr-12 py-3.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none placeholder-slate-600">
                     <button onclick="window.handleChat()" class="absolute right-2 top-2 p-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition active:scale-95">
                         <i class="ph-bold ph-paper-plane-right text-lg"></i>
                     </button>
@@ -325,9 +352,9 @@
             </div>
         </section>
 
-        <!-- 푸터 -->
+        <!-- Footer -->
         <section class="text-center pt-8 pb-4">
-            <p class="text-slate-600 text-[10px] font-medium tracking-widest uppercase">© 2026 haneulssi • Powered by Gemini Pro</p>
+            <p class="text-slate-600 text-[10px] font-medium tracking-widest uppercase">© 2026 Researcher Jo Haneul • Kyung Hee Univ.</p>
             <div class="inline-flex items-center gap-2 mt-3 px-3 py-1 bg-slate-900/50 border border-white/5 rounded-full text-[10px] text-slate-500">
                 <i class="ph-fill ph-eye"></i>
                 <span id="visit-count" class="font-mono font-bold text-indigo-400">...</span>
@@ -342,7 +369,7 @@
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, getDoc, setDoc, updateDoc, increment, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        // === 설정 ===
+        // === Configuration ===
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
         const GEMINI_API_KEY = "AIzaSyDUbyxJarLwFPXHnM7y3nSSeNdrJ0-BSSU";
@@ -359,7 +386,7 @@
             plugins: {
                 legend: { labels: { color: '#94a3b8', font: { size: 10, family: 'Pretendard' } } },
                 tooltip: { 
-                    backgroundColor: 'rgba(15, 23, 42, 0.9)', 
+                    backgroundColor: 'rgba(15, 23, 42, 0.95)', 
                     titleColor: '#f8fafc', 
                     bodyColor: '#cbd5e1',
                     borderColor: 'rgba(255,255,255,0.1)',
@@ -372,7 +399,6 @@
                 y: { 
                     grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
                     ticks: { color: '#64748b', font: { size: 10 } },
-                    beginAtZero: false 
                 },
                 x: { 
                     grid: { display: false }, 
@@ -381,27 +407,29 @@
             }
         };
 
-        // Chart 1: Risk Reduction (Data based on Jhee et al., KoGES)
-        const ctxRisk = document.getElementById('riskChart').getContext('2d');
-        new Chart(ctxRisk, {
+        // Chart 1: Coffee Type Impact (Hypothesis from Dec/Jan Note)
+        const ctxCoffee = document.getElementById('coffeeTypeChart').getContext('2d');
+        new Chart(ctxCoffee, {
             type: 'bar',
             data: {
-                labels: ['< 1 Cup', '1 Cup', '≥ 2 Cups'],
+                labels: ['Non-Drinker', 'Black Coffee', 'Mix Coffee', 'SSB'],
                 datasets: [{
-                    label: 'Hazard Ratio (CKD Risk)',
-                    data: [1.0, 0.76, 0.80], // Approximate values from paper
+                    label: 'Risk of CKD (Hypothetical OR)',
+                    data: [1.0, 0.78, 1.25, 1.45], 
                     backgroundColor: [
                         'rgba(148, 163, 184, 0.5)', // Ref
-                        'rgba(56, 189, 248, 0.7)', // Good
-                        'rgba(16, 185, 129, 0.7)'  // Good
+                        'rgba(129, 140, 248, 0.7)', // Protective
+                        'rgba(251, 191, 36, 0.7)',  // Risk
+                        'rgba(244, 63, 94, 0.7)'    // High Risk
                     ],
                     borderColor: [
                         'rgba(148, 163, 184, 1)',
-                        'rgba(56, 189, 248, 1)',
-                        'rgba(16, 185, 129, 1)'
+                        'rgba(129, 140, 248, 1)',
+                        'rgba(251, 191, 36, 1)',
+                        'rgba(244, 63, 94, 1)'
                     ],
                     borderWidth: 1,
-                    borderRadius: 4
+                    borderRadius: 6
                 }]
             },
             options: {
@@ -409,40 +437,40 @@
                 plugins: { ...commonChartOptions.plugins, legend: { display: false } },
                 scales: {
                     ...commonChartOptions.scales,
-                    y: { ...commonChartOptions.scales.y, min: 0.5, title: { display: true, text: 'Hazard Ratio (Reference=1.0)', color: '#475569' } }
+                    y: { ...commonChartOptions.scales.y, min: 0, title: { display: true, text: 'Odds Ratio (Reference=1.0)', color: '#475569' } }
                 }
             }
         });
 
-        // Chart 2: eGFR Trend Simulation (Hypothetical projection based on diabetic subgroup benefits in Kim et al.)
-        const ctxTrend = document.getElementById('trendChart').getContext('2d');
-        new Chart(ctxTrend, {
+        // Chart 2: Tea Timing (Mechanism from Nov 2025 Note)
+        const ctxTea = document.getElementById('teaTimingChart').getContext('2d');
+        new Chart(ctxTea, {
             type: 'line',
             data: {
-                labels: ['Baseline', '1 Year', '2 Years', '3 Years', '4 Years'],
+                labels: ['Dawn', 'Morning', 'Afternoon', 'Evening', 'Night'],
                 datasets: [
                     {
-                        label: 'Coffee Consumers (Diabetic)',
-                        data: [90, 89, 88.5, 88, 87.5], // Slower decline
-                        borderColor: '#818CF8',
-                        backgroundColor: 'rgba(129, 140, 248, 0.1)',
+                        label: 'Benefit to eGFR',
+                        data: [85, 95, 70, 50, 40], // Peak in Morning
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
                         tension: 0.4,
-                        fill: true
-                    },
-                    {
-                        label: 'Non-Consumers (Diabetic)',
-                        data: [90, 88, 86, 84, 81], // Faster decline
-                        borderColor: '#F43F5E',
-                        borderDash: [5, 5],
-                        backgroundColor: 'transparent',
-                        tension: 0.4
+                        fill: true,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#064E3B'
                     }
                 ]
             },
-            options: commonChartOptions
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    y: { display: false }, // Conceptual chart
+                    x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+                }
+            }
         });
 
-        // --- Particle Effect (More subtle than snow) ---
+        // --- Particle Effect ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -462,15 +490,13 @@
                 this.vx = (Math.random() - 0.5) * 0.2;
                 this.vy = (Math.random() - 0.5) * 0.2;
                 this.size = Math.random() * 2;
-                this.alpha = Math.random() * 0.5;
+                this.alpha = Math.random() * 0.3;
             }
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                if (this.x < 0) this.x = width;
-                if (this.x > width) this.x = 0;
-                if (this.y < 0) this.y = height;
-                if (this.y > height) this.y = 0;
+                if (this.x < 0) this.x = width; if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height; if (this.y > height) this.y = 0;
             }
             draw() {
                 ctx.beginPath();
@@ -479,9 +505,7 @@
                 ctx.fill();
             }
         }
-
-        for (let i = 0; i < 60; i++) particles.push(new Particle());
-
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
         function animateParticles() {
             ctx.clearRect(0, 0, width, height);
             particles.forEach(p => { p.update(); p.draw(); });
@@ -489,7 +513,7 @@
         }
         animateParticles();
 
-        // --- Fallback & Firebase Logic (Same as before but refined) ---
+        // --- Firebase & Local Mode ---
         function enableLocalMode(reason) {
             if (isLocalMode) return;
             isLocalMode = true;
@@ -515,7 +539,7 @@
                     if (user) {
                         const statusEl = document.getElementById('db-status');
                         if(statusEl) {
-                            statusEl.innerHTML = '<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span> Connected';
+                            statusEl.innerHTML = '<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span> Online';
                             statusEl.className = "text-[10px] text-emerald-400 bg-emerald-900/20 border border-emerald-500/20 px-3 py-1.5 rounded-full flex items-center gap-2 font-bold cursor-help";
                         }
                         updateVisitCount();
@@ -545,13 +569,13 @@
             if(vc) vc.innerText = v.toLocaleString();
         }
 
-        // --- Simulator Logic ---
+        // --- Simulator Logic (Refined based on Notes) ---
         const counts = { black: 0, tea: 0, mix: 0, ssb: 0 };
         const states = [
-            { limit: 30, title: "Critical", badgeColor: "bg-rose-500", desc: "신장에 부담이 큽니다. 당분 섭취를 줄이세요." },
-            { limit: 60, title: "Caution", badgeColor: "bg-amber-500", desc: "주의가 필요합니다. 첨가물을 확인하세요." },
-            { limit: 85, title: "Good", badgeColor: "bg-blue-500", desc: "양호합니다. 수분 섭취를 유지하세요." },
-            { limit: 101, title: "Optimal", badgeColor: "bg-emerald-500", desc: "최적의 상태입니다! 항산화 효과가 기대됩니다." }
+            { limit: 30, title: "High Risk", badgeColor: "bg-rose-500", desc: "당분과 첨가물 섭취가 과도합니다. (SSB/Mix Warning)" },
+            { limit: 60, title: "Caution", badgeColor: "bg-amber-500", desc: "믹스커피 섭취를 줄이고 블랙커피로 전환을 고려하세요." },
+            { limit: 85, title: "Good", badgeColor: "bg-blue-500", desc: "양호합니다. 오전 시간대 차 섭취를 추천합니다." },
+            { limit: 101, title: "Optimal", badgeColor: "bg-emerald-500", desc: "항산화 효과가 기대되는 이상적인 패턴입니다." }
         ];
 
         window.addDrink = (t) => { 
@@ -593,17 +617,16 @@
             
             const bar = document.getElementById('health-bar');
             bar.style.width = `${score}%`;
-            // Gradient Update based on score
+            
             if(score < 40) bar.className = `h-full w-full transition-all duration-500 relative bg-gradient-to-r from-rose-600 to-red-500`;
             else if(score < 70) bar.className = `h-full w-full transition-all duration-500 relative bg-gradient-to-r from-amber-500 to-orange-400`;
             else bar.className = `h-full w-full transition-all duration-500 relative bg-gradient-to-r from-emerald-500 to-teal-400`;
             
             bar.innerHTML = '<div class="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite]"></div>';
         }
-        
         window.updateKidneyStatus = () => updateUI();
 
-        // --- AI Logic ---
+        // --- AI Logic (Updated Persona) ---
         window.handleChat = async () => {
             const input = document.getElementById('chat-input');
             const msg = input.value.trim();
@@ -620,19 +643,19 @@
             const loadingId = 'loading-' + Date.now();
             win.innerHTML += `
                 <div id="${loadingId}" class="flex gap-4 mt-2">
-                    <div class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center border border-white/10">👩‍🔬</div>
+                    <div class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center border border-white/10">🧑‍💻</div>
                     <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-white/5 shadow-sm">
                         <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
                     </div>
                 </div>`;
             win.scrollTop = win.scrollHeight;
             
-            let reply = "Research server is busy. Please try again.";
+            let reply = "Server busy.";
             try {
                 if(GEMINI_API_KEY) {
                     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`, {
                         method: 'POST', headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ contents: [{ parts: [{ text: msg }] }], systemInstruction: { parts: [{ text: "당신은 영양역학 연구원 하늘씨입니다. 한국어로 전문적이지만 이해하기 쉽게 답변하세요. 다음 논문 지식을 바탕으로 답변하세요: 1. Jhee et al.(KoGES): 커피 섭취는 CKD 발생 위험 감소와 관련됨. 2. Tang et al.(UK Biobank): 커피는 신장 보호 효과가 있을 수 있음. 3. Kim et al.(KNHANES): 당뇨 여성에서 하루 2잔 이상 커피는 eGFR 감소 위험을 낮춤. 4. 일반적 주의사항: 믹스커피의 당분과 인공첨가물은 주의해야 함. 답변 시 이모지를 적절히 사용하고, 논문을 인용하는 톤을 유지하세요." }] } })
+                        body: JSON.stringify({ contents: [{ parts: [{ text: msg }] }], systemInstruction: { parts: [{ text: "당신은 조하늘 연구원의 AI 어시스턴트입니다. 다음 연구노트 내용을 숙지하고 있습니다: 1) 9월-10월: 선행연구 조사 (커피/차는 긍정적, 가당음료는 부정적). 2) 11월: 메커니즘 연구 (차 섭취 타이밍-오전, 생체리듬). 3) 12월-1월: 연구 설계 (KNHANES 9기 2022-2024 데이터 사용, CKD-EPI 공식 사용, 19-64세 성인 대상). 답변은 연구원 조하늘의 관점에서 전문적이고 논리적으로 작성하세요. 한국어를 사용하세요." }] } })
                     });
                     const data = await res.json();
                     if(data.candidates && data.candidates[0].content) {
@@ -646,7 +669,7 @@
 
             win.innerHTML += `
                 <div class="flex gap-4 animate__animated animate__fadeInUp">
-                    <div class="flex-shrink-0 w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-lg border border-white/10">👩‍🔬</div>
+                    <div class="flex-shrink-0 w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-lg border border-white/10">🧑‍💻</div>
                     <div class="bg-slate-800/60 backdrop-blur-sm p-4 rounded-2xl rounded-tl-none border border-white/5 text-sm text-slate-200 max-w-[85%] chat-content shadow-sm">
                         ${reply}
                     </div>
