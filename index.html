@@ -36,6 +36,8 @@
         .chat-content table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.85rem; background-color: white; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; }
         .chat-content th { background-color: #f1f5f9; font-weight: 600; text-align: left; padding: 8px 12px; border-bottom: 2px solid #e2e8f0; color: #475569; }
         .chat-content td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+        .chat-content strong { color: #4F46E5; font-weight: 700; }
+        .chat-content ul { list-style-type: disc; padding-left: 1.2rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
         
         /* 버튼 바운스 효과 */
         .bounce-btn:active { transform: scale(0.90); }
@@ -74,7 +76,7 @@
 
     <main class="max-w-6xl mx-auto px-4 py-8 space-y-16">
 
-        <!-- 섹션 1: 연구 개요 (Hero) - 요청하신 카드 디자인 복구 -->
+        <!-- 섹션 1: 연구 개요 (Hero) -->
         <section id="overview" class="relative">
             <div class="bg-gradient-to-br from-stone-800 to-stone-700 rounded-3xl p-6 md:p-12 text-white shadow-2xl overflow-hidden border border-stone-600 relative">
                 <!-- 배경 효과 -->
@@ -99,7 +101,7 @@
                         </p>
                     </div>
 
-                    <!-- 요청하신 [Research Key Metrics] 카드 디자인 복구 -->
+                    <!-- Research Key Metrics 카드 -->
                     <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
                         <h3 class="text-[11px] font-bold text-stone-300 uppercase tracking-widest mb-5">Research Key Metrics</h3>
                         <div class="space-y-6">
@@ -272,7 +274,8 @@
                 <div class="p-4 bg-white border-b border-slate-100 flex justify-between items-center">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                        <span class="font-bold text-slate-700">AI 조하늘 연구원</span>
+                        <!-- 이름 변경 요청 반영 -->
+                        <span class="font-bold text-slate-700">AI 하늘씨.</span>
                     </div>
                     <span class="text-[10px] text-slate-400 bg-slate-100 px-2 py-1 rounded">API Key: <span id="api-status">미설정 (기본모드)</span></span>
                 </div>
@@ -281,8 +284,8 @@
                     <div class="flex gap-3">
                         <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div>
                         <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-sm text-slate-700 max-w-[85%] chat-content">
-                            안녕하세요! 저는 음료와 신장 건강을 연구하는 AI 어시스턴트입니다.<br>
-                            <strong>API 키가 없으면</strong> 기본 답변만, <strong>키를 넣으시면</strong> 똑똑한 대화가 가능해요!
+                            안녕하세요! 저는 음료와 신장 건강을 연구하는 <strong>AI 하늘씨.</strong>입니다.<br>
+                            궁금한 키워드를 입력해주시면 아주 자세히 설명해 드릴게요! 🧐
                         </div>
                     </div>
                 </div>
@@ -450,13 +453,16 @@
             content.innerHTML = res ? marked.parse(res) : "AI 연결 실패. 다시 시도해주세요.";
         }
 
-        // --- 3. 챗봇 (하이브리드) ---
+        // --- 3. 챗봇 (하이브리드: 룰 기반 답변 대폭 보강) ---
         const botResponses = {
-            "믹스": "믹스커피는 **설탕/프림**으로 인해 대사증후군 위험을 높일 수 있습니다.",
-            "블랙": "블랙커피는 폴리페놀이 풍부하여 적당량 섭취 시 **신장 보호** 효과가 기대됩니다.",
-            "녹차": "녹차는 강력한 항산화제로 신장 기능 보존에 **긍정적**입니다.",
-            "가당": "탄산/주스는 **가장 위험**합니다. eGFR 감소의 직접적 원인이 될 수 있습니다.",
-            "default": "API 키를 설정하면 더 똑똑하게 답변할 수 있어요! (기본 키워드: 믹스, 블랙, 녹차, 가당)"
+            "믹스": "믹스커피는 한국인의 소울 푸드지만, 신장에는 부담이 될 수 있어요. 😥 주성분인 **설탕과 프림(포화지방)**은 혈당과 콜레스테롤을 높여 **대사증후군**을 유발할 수 있거든요. 대사증후군은 신장 기능을 떨어뜨리는 주요 원인이 됩니다. 가급적 하루 1잔 이하로 줄이시거나, 설탕을 뺀 블랙커피로 바꾸시는 걸 추천드려요!",
+            "블랙": "블랙커피는 적당히 드시면 신장에 친구가 될 수 있어요! ☕ 커피 속 **폴리페놀(항산화 성분)**이 염증을 줄여주기 때문이죠. 여러 연구에서 하루 3잔 정도의 블랙커피는 신장 질환 위험을 낮춘다는 결과가 있습니다. 단, 카페인에 민감하시거나 불면증이 있다면 조절이 필요해요.",
+            "녹차": "녹차나 홍차는 아주 훌륭한 선택이에요! 🍵 **카테킨** 같은 강력한 항산화 성분이 혈관을 건강하게 하고, 신장 세포를 보호하는 데 도움을 줍니다. 또한 수분 섭취를 돕기 때문에 신장 결석 예방에도 긍정적이죠. 설탕 없이 맑게 우려 드시는 게 가장 좋습니다.",
+            "가당": "가당음료(탄산, 주스)는 신장에 **가장 위험한 적**입니다! 🚨 액상과당은 체내에서 요산 수치를 높여 신장 결석을 유발하고, 급격한 혈당 상승으로 신장 여과기(사구체)를 망가뜨립니다. 갈증 날 땐 음료수 대신 물이나 탄산수를 드시는 게 어떨까요?",
+            "당뇨": "당뇨병 환자분들은 혈당 관리가 곧 신장 관리입니다. 🩸 믹스커피나 가당음료처럼 혈당을 빠르게 올리는 음료는 **치명적**일 수 있어요. 신장 합병증을 막기 위해 당분 섭취를 엄격히 제한하고, 물이나 녹차 위주로 수분을 섭취해 주세요!",
+            "egfr": "**eGFR(사구체여과율)**은 신장이 1분에 얼마나 많은 피를 깨끗하게 걸러내는지를 보여주는 '신장 성적표'예요. 💯<br><br>• <strong>90 이상:</strong> 아주 건강함<br>• <strong>60~89:</strong> 약간의 기능 감소 (주의)<br>• <strong>60 미만:</strong> 신장 기능 저하 의심 (전문의 상담 필요)<br><br>이 수치를 잘 지키는 것이 중요합니다!",
+            "연구": "본 연구는 2026년 1월부터 경희대학교에서 진행 중입니다. 👩‍🔬 서구권 연구와 달리, 한국인의 특성인 **'믹스커피'** 섭취가 신장에 미치는 영향을 중점적으로 분석하고 있어요. 우리의 식습관에 맞는 건강 가이드를 만드는 것이 목표랍니다!",
+            "default": "죄송해요, 제가 아직 배우고 있는 중이라 어려운 말은 잘 모르겠어요. 😅<br><br>대신 <strong>'믹스커피', '블랙커피', '녹차', '가당음료', 'eGFR'</strong> 같은 단어로 물어봐 주시면 제가 아는 한에서 아주 자세히 설명해 드릴게요!<br><br>(우측 상단에서 <strong>API 키</strong>를 설정하시면 제미나이와 자유롭게 대화할 수 있어요!)"
         };
 
         function askBot(msg) {
@@ -489,11 +495,18 @@
             } else {
                 // 기본 모드 (룰 기반)
                 await new Promise(r => setTimeout(r, 800)); // 흉내내기 딜레이
+                // 개선된 키워드 매칭 로직
                 if (msg.includes("믹스")) reply = botResponses["믹스"];
-                else if (msg.includes("블랙")) reply = botResponses["블랙"];
-                else if (msg.includes("녹차") || msg.includes("차")) reply = botResponses["녹차"];
-                else if (msg.includes("가당") || msg.includes("탄산")) reply = botResponses["가당"];
+                else if (msg.includes("블랙") || msg.includes("아메리카노")) reply = botResponses["블랙"];
+                else if (msg.includes("녹차") || msg.includes("홍차") || msg.includes("차")) reply = botResponses["녹차"];
+                else if (msg.includes("가당") || msg.includes("탄산") || msg.includes("주스") || msg.includes("콜라")) reply = botResponses["가당"];
+                else if (msg.includes("당뇨")) reply = botResponses["당뇨"];
+                else if (msg.toLowerCase().includes("egfr") || msg.includes("수치") || msg.includes("점수")) reply = botResponses["egfr"];
+                else if (msg.includes("연구") || msg.includes("결과") || msg.includes("목적")) reply = botResponses["연구"];
                 else reply = botResponses["default"];
+                
+                // 마크다운 파싱 적용 (룰 기반 답변도 예쁘게 나오도록)
+                reply = marked.parse(reply);
             }
 
             document.getElementById(loadingId).remove();
