@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 연구노트: 음료와 신장 건강 (Mobile Ver.)</title>
+    <title>2026 연구노트: 음료와 신장 건강 (Master Ver.)</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,43 +26,26 @@
             background-color: #F8FAFC;
             color: #1E293B;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden; /* 가로 스크롤 방지 */
+            overflow-x: hidden;
         }
         
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* 채팅 스타일 */
         .chat-content { font-size: 0.95rem; line-height: 1.6; word-break: keep-all; }
         .chat-content strong { color: #4F46E5; font-weight: 700; }
         .chat-content ul { list-style-type: disc; padding-left: 1.2rem; margin: 0.5rem 0; }
-        .chat-content li { margin-bottom: 0.3rem; }
         
-        /* 버튼 바운스 효과 */
         .bounce-btn:active { transform: scale(0.95); }
-        
-        /* 모바일 카드 스타일 강화 */
-        .mobile-card {
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
-        }
+        .mobile-card { border-radius: 1.5rem; box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1); }
 
-        /* 챗봇 타이핑 애니메이션 */
         .typing-dot {
             animation: typing 1.4s infinite ease-in-out both;
-            height: 6px;
-            width: 6px;
-            background-color: #6366F1;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 2px;
+            height: 6px; width: 6px; background-color: #6366F1; border-radius: 50%; display: inline-block; margin: 0 2px;
         }
         .typing-dot:nth-child(1) { animation-delay: -0.32s; }
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
-        }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
     </style>
 </head>
 <body class="antialiased selection:bg-indigo-100 selection:text-indigo-900 pb-20">
@@ -75,21 +58,22 @@
                     <span class="text-2xl animate-bounce">🫘</span>
                     <div>
                         <h1 class="font-bold text-slate-800 text-lg leading-none">2026 연구노트</h1>
-                        <p class="text-[11px] text-slate-500 mt-1">Mobile Interactive Dashboard</p>
+                        <p class="text-[11px] text-slate-500 mt-1">Real-time Connected</p>
                     </div>
                 </div>
-                <!-- 탭 메뉴 -->
-                <div class="flex gap-2 text-sm font-bold text-slate-500">
-                    <a href="#lab" class="px-3 py-1.5 rounded-full bg-slate-100 text-indigo-600">실험실</a>
-                    <a href="#chat" class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-600">AI 하늘씨</a>
-                </div>
+            </div>
+            <!-- 탭 메뉴 -->
+            <div class="flex gap-2 overflow-x-auto hide-scrollbar px-4 pb-2 mt-2 border-t border-slate-50 pt-2">
+                <a href="#lab" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-indigo-600 bg-indigo-50 rounded-full">실험실</a>
+                <a href="#chat" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-slate-600 bg-slate-50 rounded-full">AI 하늘씨</a>
+                <a href="#guestbook" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-emerald-600 bg-emerald-50 rounded-full">📝 방명록</a>
             </div>
         </div>
     </nav>
 
     <main class="max-w-3xl mx-auto px-4 py-6 space-y-12">
 
-        <!-- 섹션 1: 연구 개요 (업데이트됨: 커피+차+가당음료) -->
+        <!-- 섹션 1: 연구 개요 -->
         <section id="overview" class="mobile-card bg-gradient-to-br from-stone-800 to-stone-700 p-6 text-white overflow-hidden relative">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-500/20 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-stone-500/30 rounded-full blur-3xl"></div>
@@ -105,11 +89,11 @@
                     </h2>
                     <p class="text-stone-300 text-sm leading-relaxed font-light">
                         커피, 차, 그리고 가당음료.<br>
-                        무엇을 마시는지에 따라 당신의 콩팥 건강이 달라질 수 있습니다. KNHANES 빅데이터 분석 결과를 확인하세요.
+                        무엇을 마시는지에 따라 당신의 콩팥 건강이 달라질 수 있습니다.
                     </p>
                 </div>
 
-                <!-- Research Key Metrics 카드 (업데이트됨) -->
+                <!-- Research Key Metrics -->
                 <div class="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/10 shadow-inner">
                     <h3 class="text-[10px] font-bold text-stone-300 uppercase tracking-widest mb-4 border-b border-white/10 pb-2">Research Key Metrics</h3>
                     <div class="space-y-5">
@@ -147,328 +131,343 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-white/10 text-[10px] text-stone-400 leading-relaxed opacity-70">
-                        * 교란 변수 통제: 연령, 성별, BMI, 흡연, 음주, 고혈압, 당뇨병 등 다변량 분석 적용
-                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 섹션 2: 신장 지키기 게임 -->
         <section id="lab" class="mobile-card bg-white p-6 border border-slate-100 relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-500"></div>
-            
-            <div class="text-center mb-6 mt-2">
+            <div class="text-center mb-6">
                 <h2 class="text-2xl font-bold text-slate-900">🧪 내 신장 다마고치</h2>
                 <p class="text-slate-500 text-xs mt-1">버튼을 터치해 음료를 마셔보세요!</p>
             </div>
 
-            <!-- 아바타 & 상태창 -->
+            <!-- 아바타 -->
             <div class="bg-slate-50 rounded-2xl p-6 flex flex-col items-center justify-center mb-6 border border-slate-200">
-                <div class="absolute top-4 right-4">
-                    <button onclick="resetDrinks()" class="text-xs bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm text-slate-500 active:bg-slate-100">↺ 리셋</button>
-                </div>
-                
-                <div id="kidney-char" class="text-[80px] mb-3 transition-all duration-300 animate__animated animate__pulse animate__infinite cursor-pointer" onclick="pokeKidney()">
-                    🫘
-                </div>
-                
+                <button onclick="window.resetDrinks()" class="absolute top-4 right-4 text-xs bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm text-slate-500">↺ 리셋</button>
+                <div id="kidney-char" class="text-[80px] mb-3 transition-all duration-300 animate__animated animate__pulse animate__infinite cursor-pointer" onclick="window.pokeKidney()">🫘</div>
                 <h3 id="status-title" class="text-xl font-black text-slate-800 mb-1">매우 건강함</h3>
-                <p id="status-desc" class="text-xs text-slate-500 bg-white px-3 py-1.5 rounded-lg shadow-sm border border-slate-100">
-                    "항산화 성분으로 보호받고 있어요!"
-                </p>
-
                 <div class="w-full mt-5 bg-slate-200 rounded-full h-2.5 overflow-hidden">
                     <div id="health-bar" class="bg-emerald-500 h-full w-full transition-all duration-700 ease-out"></div>
                 </div>
             </div>
 
-            <!-- 컨트롤 패널 -->
+            <!-- 컨트롤 -->
             <div class="grid grid-cols-2 gap-3 mb-4">
-                <button onclick="addDrink('tea')" class="bounce-btn bg-emerald-50 border border-emerald-100 rounded-xl p-3 flex flex-col items-center relative active:bg-emerald-100">
-                    <span class="text-3xl mb-1">🍵</span>
-                    <span class="font-bold text-sm text-slate-700">녹차/홍차</span>
-                    <span class="text-[10px] text-emerald-600 font-medium">+ 항산화 (Good)</span>
-                    <span id="count-tea" class="absolute top-2 right-2 bg-white text-emerald-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm border border-emerald-100">0</span>
-                </button>
-                <button onclick="addDrink('black')" class="bounce-btn bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center relative active:bg-slate-100">
-                    <span class="text-3xl mb-1">☕</span>
-                    <span class="font-bold text-sm text-slate-700">블랙커피</span>
-                    <span class="text-[10px] text-slate-500 font-medium">적당히 (Okay)</span>
-                    <span id="count-black" class="absolute top-2 right-2 bg-white text-slate-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm border border-slate-200">0</span>
-                </button>
-                <button onclick="addDrink('mix')" class="bounce-btn bg-amber-50 border border-amber-100 rounded-xl p-3 flex flex-col items-center relative active:bg-amber-100">
-                    <span class="text-3xl mb-1">🍬</span>
-                    <span class="font-bold text-sm text-slate-700">믹스커피</span>
-                    <span class="text-[10px] text-amber-600 font-medium">- 당분/프림 (Bad)</span>
-                    <span id="count-mix" class="absolute top-2 right-2 bg-white text-amber-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm border border-amber-100">0</span>
-                </button>
-                <button onclick="addDrink('ssb')" class="bounce-btn bg-rose-50 border border-rose-100 rounded-xl p-3 flex flex-col items-center relative active:bg-rose-100">
-                    <span class="text-3xl mb-1">🥤</span>
-                    <span class="font-bold text-sm text-slate-700">탄산/주스</span>
-                    <span class="text-[10px] text-rose-600 font-medium">-- 위험 (Worst)</span>
-                    <span id="count-ssb" class="absolute top-2 right-2 bg-white text-rose-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm border border-rose-100">0</span>
-                </button>
+                <button onclick="window.addDrink('tea')" class="bounce-btn bg-emerald-50 border border-emerald-100 rounded-xl p-3 flex flex-col items-center relative"><span class="text-3xl mb-1">🍵</span><span class="font-bold text-sm text-slate-700">녹차/홍차</span><span id="count-tea" class="absolute top-2 right-2 bg-white text-emerald-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">0</span></button>
+                <button onclick="window.addDrink('black')" class="bounce-btn bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center relative"><span class="text-3xl mb-1">☕</span><span class="font-bold text-sm text-slate-700">블랙커피</span><span id="count-black" class="absolute top-2 right-2 bg-white text-slate-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">0</span></button>
+                <button onclick="window.addDrink('mix')" class="bounce-btn bg-amber-50 border border-amber-100 rounded-xl p-3 flex flex-col items-center relative"><span class="text-3xl mb-1">🍬</span><span class="font-bold text-sm text-slate-700">믹스커피</span><span id="count-mix" class="absolute top-2 right-2 bg-white text-amber-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">0</span></button>
+                <button onclick="window.addDrink('ssb')" class="bounce-btn bg-rose-50 border border-rose-100 rounded-xl p-3 flex flex-col items-center relative"><span class="text-3xl mb-1">🥤</span><span class="font-bold text-sm text-slate-700">가당음료</span><span id="count-ssb" class="absolute top-2 right-2 bg-white text-rose-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">0</span></button>
             </div>
-
-            <label class="flex items-center justify-center gap-2 p-3 bg-slate-50 rounded-xl cursor-pointer active:bg-slate-100 border border-slate-200">
-                <input type="checkbox" id="check-diabetes" class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500" onchange="updateKidneyStatus()">
+            <label class="flex items-center justify-center gap-2 p-3 bg-slate-50 rounded-xl cursor-pointer border border-slate-200">
+                <input type="checkbox" id="check-diabetes" class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500" onchange="window.updateKidneyStatus()">
                 <span class="text-sm font-bold text-slate-600">🩸 당뇨병 있음 (위험도 증가)</span>
             </label>
         </section>
 
-        <!-- 섹션 3: AI 하늘씨 (챗봇 - 지식 대폭 확장) -->
-        <section id="chat" class="mobile-card bg-white border border-slate-100 shadow-xl flex flex-col h-[550px] overflow-hidden">
+        <!-- 섹션 3: AI 하늘씨 -->
+        <section id="chat" class="mobile-card bg-white border border-slate-100 shadow-xl flex flex-col h-[500px] overflow-hidden">
             <div class="p-4 bg-indigo-50/50 border-b border-indigo-50 flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></span>
                     <span class="font-bold text-slate-700">AI 하늘씨.</span>
                 </div>
-                <button onclick="document.getElementById('chat-help').classList.toggle('hidden')" class="text-xs text-indigo-500 bg-white px-2 py-1 rounded border border-indigo-100">❓ 질문 팁</button>
+                <span class="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full font-bold">● Online</span>
             </div>
-
-            <!-- 도움말 박스 (초기 숨김) -->
-            <div id="chat-help" class="hidden bg-indigo-50 p-4 text-xs text-indigo-800 border-b border-indigo-100">
-                <p class="font-bold mb-1">💡 이런 걸 물어보세요:</p>
-                <div class="grid grid-cols-2 gap-1">
-                    <span>• "연구 대상은 누구야?"</span>
-                    <span>• "물은 얼마나 마셔?"</span>
-                    <span>• "카페인은 괜찮아?"</span>
-                    <span>• "당뇨인데 커피 마셔도 돼?"</span>
-                    <span>• "eGFR 수치가 뭐야?"</span>
-                    <span>• "믹스커피 성분 알려줘"</span>
-                </div>
-            </div>
-
             <div id="chat-window" class="flex-1 p-4 overflow-y-auto space-y-4 bg-white">
                 <div class="flex gap-3">
                     <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div>
                     <div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">
-                        안녕하세요! <strong>AI 하늘씨.</strong>입니다.<br>
-                        더 다양한 질문에 답할 수 있도록 공부를 많이 했어요! 📚<br><br>
-                        "물은 얼마나 마셔야 해?", "연구 방법이 뭐야?", "당뇨에 커피는?" 처럼 자유롭게 물어봐주세요.
+                        안녕하세요! <strong>AI 하늘씨.</strong>입니다.<br>궁금한 점을 물어보시면 데이터를 기반으로 답변해 드려요!
                     </div>
                 </div>
             </div>
-
-            <!-- 추천 질문 (가로 스크롤) -->
-            <div class="px-4 py-2 flex gap-2 overflow-x-auto hide-scrollbar bg-white border-t border-slate-50">
-                <button onclick="askBot('연구 대상')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">연구 대상?</button>
-                <button onclick="askBot('카페인 영향')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">카페인 영향</button>
-                <button onclick="askBot('물 섭취량')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">물 마시기</button>
-                <button onclick="askBot('연구 방법')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">연구 방법</button>
-            </div>
-
-            <div class="p-4 bg-white border-t border-slate-100">
-                <div class="flex gap-2 relative">
-                    <input type="text" id="chat-input" placeholder="궁금한 내용을 입력하세요..." class="w-full bg-slate-50 border-0 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
-                    <button onclick="handleChat()" class="absolute right-2 top-2 bg-indigo-600 text-white p-1.5 rounded-lg active:bg-indigo-700 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" /></svg>
-                    </button>
-                </div>
+            <div class="p-4 bg-white border-t border-slate-100 flex gap-2">
+                <input type="text" id="chat-input" placeholder="궁금한 내용을 입력하세요..." class="w-full bg-slate-50 border-0 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                <button onclick="window.handleChat()" class="bg-indigo-600 text-white p-3 rounded-xl"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" /></svg></button>
             </div>
         </section>
 
-        <!-- 섹션 4: 차트 -->
-        <section id="analysis" class="space-y-6">
-            <div class="mobile-card bg-white p-6 border border-slate-100">
-                <h4 class="font-bold text-lg text-slate-800 mb-4 text-center flex items-center justify-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-slate-800 rounded-full"></span> 1잔당 영양 성분
-                </h4>
-                <div class="chart-container h-[250px]">
-                    <canvas id="nutrientChart"></canvas>
-                </div>
+        <!-- 섹션 4: 공유 방명록 (삭제 기능 추가) -->
+        <section id="guestbook" class="mobile-card bg-white p-6 border border-emerald-100 shadow-lg relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+            
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    📝 방명록
+                </h3>
+                <span id="db-status" class="text-[10px] text-slate-400 bg-slate-100 px-2 py-1 rounded-full flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span> 연결 중...
+                </span>
             </div>
-            <div class="mobile-card bg-white p-6 border border-slate-100">
-                <h4 class="font-bold text-lg text-slate-800 mb-4 text-center flex items-center justify-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-slate-800 rounded-full"></span> 신장 위험 가설
-                </h4>
-                <div class="chart-container h-[250px]">
-                    <canvas id="hypothesisChart"></canvas>
-                </div>
+            
+            <!-- 메시지 목록 -->
+            <div id="msg-list" class="space-y-3 mb-4 h-[250px] overflow-y-auto bg-slate-50 p-4 rounded-2xl border border-slate-100 scroll-smooth">
+                <p class="text-xs text-center text-slate-400 py-8">데이터를 불러오는 중입니다...</p>
             </div>
+
+            <!-- 작성 폼 -->
+            <form id="guest-form" class="space-y-2">
+                <div class="grid grid-cols-3 gap-2">
+                    <input type="text" id="g-name" placeholder="닉네임" class="col-span-1 w-full text-sm p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500" required>
+                    <input type="text" id="g-msg" placeholder="응원의 한마디!" class="col-span-2 w-full text-sm p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500" required>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-md active:scale-95 flex justify-center items-center gap-2">
+                    등록하기 🖊️
+                </button>
+            </form>
         </section>
 
+        <!-- 푸터 & 방문자수 -->
         <section class="text-center pt-8 pb-10">
             <p class="text-slate-400 text-xs font-medium">© 2026 하늘씨.</p>
+            <div class="inline-flex items-center gap-2 mt-3 px-3 py-1 bg-slate-100 rounded-full text-[10px] text-slate-500">
+                <span>👀 Total Visits:</span>
+                <span id="visit-count" class="font-mono font-bold text-indigo-600">...</span>
+            </div>
         </section>
 
     </main>
 
-    <script>
-        // --- 1. 신장 게임 로직 ---
-        const counts = { black: 0, tea: 0, mix: 0, ssb: 0 };
-        const kidneyStates = {
-            great: { icon: "🫘", title: "최상의 컨디션!", desc: "항산화 성분으로 보호받고 있어요.", color: "bg-emerald-500" },
-            good: { icon: "🙂", title: "양호함", desc: "수분을 충분히 섭취하고 계시네요.", color: "bg-blue-500" },
-            warn: { icon: "😵‍💫", title: "부담 느끼는 중...", desc: "당분이 너무 많아요! 신장이 힘들어합니다.", color: "bg-amber-500" },
-            bad: { icon: "🤮", title: "SOS! 위험해요", desc: "당장 그만 마셔야 해요! 신장 과부하 상태!", color: "bg-rose-600" }
+    <!-- Firebase 모듈 스크립트 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, getDoc, setDoc, updateDoc, increment, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // === 사용자 설정 ===
+        const firebaseConfig = {
+            apiKey: "AIzaSyDrbeTmQuToIehuJIkmuocE-0fbUjDWLpI",
+            authDomain: "kidney-lab.firebaseapp.com",
+            projectId: "kidney-lab",
+            storageBucket: "kidney-lab.firebasestorage.app",
+            messagingSenderId: "511509135095",
+            appId: "1:511509135095:web:c5601d6c9b243a88605df2",
+            measurementId: "G-WQF7EJBFTL"
         };
 
-        function addDrink(type) {
-            counts[type]++;
-            document.getElementById(`count-${type}`).innerText = counts[type];
-            updateKidneyStatus();
-        }
+        let db = null;
+        let isLocalMode = false;
 
-        function resetDrinks() {
-            for (let k in counts) counts[k] = 0;
-            document.querySelectorAll('[id^="count-"]').forEach(el => el.innerText = '0');
-            updateKidneyStatus();
-        }
-
-        function pokeKidney() {
-            const char = document.getElementById('kidney-char');
-            char.classList.add('animate__rubberBand');
-            setTimeout(() => char.classList.remove('animate__rubberBand'), 1000);
-        }
-
-        function updateKidneyStatus() {
-            let score = 100;
-            score += (counts.black * 2) + (counts.tea * 3);
-            score -= (counts.mix * 5) + (counts.ssb * 10);
-            if (document.getElementById('check-diabetes').checked) score -= (counts.mix * 2) + (counts.ssb * 5);
-            score = Math.max(0, Math.min(100, score));
-
-            let state = 'great';
-            if (score < 30) state = 'bad';
-            else if (score < 60) state = 'warn';
-            else if (score < 85) state = 'good';
-
-            const charEl = document.getElementById('kidney-char');
-            charEl.innerText = kidneyStates[state].icon;
-            document.getElementById('status-title').innerText = kidneyStates[state].title;
-            document.getElementById('status-desc').innerText = kidneyStates[state].desc;
+        function enableLocalMode(reason) {
+            if (isLocalMode) return;
+            isLocalMode = true;
+            console.warn("Switching to Local Mode:", reason);
             
-            const barEl = document.getElementById('health-bar');
-            barEl.style.width = `${score}%`;
-            barEl.className = `h-full w-full transition-all duration-500 ease-out ${kidneyStates[state].color}`;
-            
-            charEl.classList.remove('animate__pulse');
-            void charEl.offsetWidth; 
-            charEl.classList.add('animate__swing');
-            setTimeout(() => {
-                charEl.classList.remove('animate__swing');
-                charEl.classList.add('animate__pulse');
-            }, 1000);
-        }
-
-        // --- 2. 챗봇 지식베이스 (대폭 확장) ---
-        const knowledgeBase = [
-            {
-                keywords: ["믹스", "프림", "봉지", "자판기"],
-                response: "### 믹스커피 (Mix Coffee)\n믹스커피는 한국인의 '소울 푸드'지만 신장에는 부담이 될 수 있어요.\n- **위험 요인:** 설탕과 프림(포화지방) 함량이 높아 혈당과 중성지방 수치를 높입니다.\n- **신장에 미치는 영향:** 대사증후군을 유발하여 장기적으로 eGFR(사구체여과율)을 떨어뜨리는 간접적인 원인이 됩니다.\n- **권장:** 하루 1잔 이하로 줄이시거나, 블랙커피로 대체하는 것이 좋습니다."
-            },
-            {
-                keywords: ["블랙", "아메리카노", "드립", "원두", "에스프레소"],
-                response: "### 블랙커피 (Black Coffee)\n적당한 블랙커피는 신장에 긍정적일 수 있습니다! ☕\n- **이점:** 커피 속의 '폴리페놀(클로로겐산)'은 강력한 항산화제로, 신장의 염증을 줄여줍니다.\n- **주의점:** 카페인은 일시적으로 혈압을 높일 수 있으므로, 고혈압 환자는 주의가 필요합니다.\n- **권장:** 하루 2~3잔 정도가 적당합니다."
-            },
-            {
-                keywords: ["녹차", "홍차", "차", "티"],
-                response: "### 차 (Tea)\n녹차와 홍차는 신장 건강의 든든한 지원군입니다. 🍵\n- **카테킨:** 강력한 항산화 성분으로 혈관 내피세포를 보호합니다.\n- **수분 섭취:** 충분한 차 섭취는 소변량을 늘려 신장 결석 예방에 도움을 줍니다.\n- **팁:** 설탕을 넣지 않고 맑게 우려 드시는 것이 가장 좋습니다."
-            },
-            {
-                keywords: ["가당", "탄산", "주스", "콜라", "사이다", "에이드", "액상과당"],
-                response: "### 가당음료 (SSBs)\n신장에 **가장 위험한 음료** 1위입니다! 🚨\n- **액상과당:** 요산 수치를 급격히 높여 통풍과 신장 결석을 유발합니다.\n- **인슐린 저항성:** 급격한 혈당 상승은 신장 여과기(사구체)에 직접적인 손상을 줍니다.\n- **결론:** 목이 마를 땐 음료수 대신 **물**을 드세요!"
-            },
-            {
-                keywords: ["eGFR", "사구체", "여과율", "수치", "점수"],
-                response: "### eGFR (추정 사구체여과율)\n신장의 기능을 나타내는 성적표입니다. 💯\n- **90 이상:** 정상 (아주 건강함)\n- **60 ~ 89:** 경도 감소 (관리가 필요함)\n- **60 미만:** 만성콩팥병(CKD) 의심 단계\n\n이 수치가 떨어지지 않도록 짜게 먹지 않고, 당분을 줄이는 것이 핵심입니다."
-            },
-            {
-                keywords: ["당뇨", "혈당"],
-                response: "### 당뇨병과 신장\n당뇨병은 만성콩팥병의 **제1 원인**입니다. 🩸\n혈액 속의 과도한 당분이 신장의 미세혈관을 막아버리기 때문입니다.\n- **필수 수칙:** 믹스커피와 주스 섭취를 엄격히 제한하고, 정기적으로 소변 검사를 받아야 합니다."
-            },
-            {
-                keywords: ["연구", "대상", "참여자", "누구", "데이터"],
-                response: "### 연구 개요\n- **데이터:** 질병관리청의 **국민건강영양조사(KNHANES)** 데이터를 사용했습니다.\n- **대상:** 만 19세~64세의 대한민국 성인 남녀\n- **목적:** 서구권과 달리 '믹스커피'를 많이 마시는 한국인의 특성이 신장 기능에 어떤 영향을 주는지 밝히는 것입니다."
-            },
-            {
-                keywords: ["방법", "분석", "통계", "로지스틱"],
-                response: "### 연구 방법론\n정확한 분석을 위해 다음과 같은 통계 기법을 사용했습니다.\n1. **다변량 로지스틱 회귀분석:** 나이, 성별, 흡연, 음주 등 다른 요인들의 영향을 배제하고 순수하게 음료의 영향만 계산했습니다.\n2. **그룹 분류:** 비섭취군, 블랙커피군, 믹스커피군, 가당음료군 등으로 나누어 eGFR 수치를 비교했습니다."
-            },
-            {
-                keywords: ["물", "수분"],
-                response: "### 물 섭취 가이드\n신장 건강의 기본은 **충분한 물 섭취**입니다. 💧\n- 물은 혈액을 묽게 만들어 신장의 여과 부담을 줄여줍니다.\n- 하루 1.5L ~ 2L 정도의 미지근한 물을 조금씩 자주 드시는 것을 추천합니다."
-            },
-            {
-                keywords: ["카페인", "디카페인"],
-                response: "### 카페인 영향\n카페인은 이뇨 작용이 있어 일시적으로 탈수를 유발할 수 있지만, 신장 기능 자체를 망가뜨리지는 않습니다.\n다만, **신장 낭종**이 있거나 **고혈압**이 심한 경우에는 디카페인 커피를 드시는 것이 안전합니다."
+            const statusEl = document.getElementById('db-status');
+            if (statusEl) {
+                statusEl.innerHTML = '<span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span> 로컬 모드';
+                statusEl.className = "text-[10px] text-slate-500 bg-slate-100 px-2 py-1 rounded-full flex items-center gap-1 font-bold";
             }
+            loadLocalGuestbook();
+            loadLocalVisits();
+        }
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            initFirestoreListeners();
+            updateVisitCount();
+        } catch (e) {
+            enableLocalMode("Initial connection failed");
+        }
+
+        function initFirestoreListeners() {
+            if (!db) return;
+            try {
+                const q = query(collection(db, "guestbook"), orderBy("timestamp", "desc"), limit(50));
+                onSnapshot(q, (snapshot) => {
+                    const statusEl = document.getElementById('db-status');
+                    if (statusEl && !isLocalMode) {
+                        statusEl.innerHTML = '<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> 실시간 연결됨';
+                        statusEl.className = "text-[10px] text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full flex items-center gap-1 font-bold";
+                    }
+                    const list = document.getElementById('msg-list');
+                    if (snapshot.empty) {
+                        list.innerHTML = '<p class="text-xs text-center text-slate-400 py-8">아직 작성된 글이 없습니다.<br>첫 글을 남겨주세요!</p>';
+                        return;
+                    }
+                    list.innerHTML = snapshot.docs.map(doc => renderMsg(doc.data(), doc.id, 'firebase')).join('');
+                }, (error) => {
+                    enableLocalMode(error.message);
+                });
+            } catch (e) {
+                enableLocalMode(e.message);
+            }
+        }
+
+        async function updateVisitCount() {
+            if (!db) return;
+            const counterRef = doc(db, "meta", "visits");
+            try {
+                await updateDoc(counterRef, { count: increment(1) }).catch(async () => {
+                    try { await setDoc(counterRef, { count: 1 }); } catch(e) { throw e; }
+                });
+                onSnapshot(counterRef, (doc) => {
+                    if (doc.exists()) {
+                        document.getElementById('visit-count').innerText = doc.data().count.toLocaleString();
+                    }
+                });
+            } catch (e) {
+                loadLocalVisits(); 
+            }
+        }
+
+        function loadLocalGuestbook() {
+            const msgs = JSON.parse(localStorage.getItem('local_guestbook') || '[]');
+            const list = document.getElementById('msg-list');
+            if (msgs.length === 0) {
+                list.innerHTML = '<div class="flex flex-col items-center justify-center h-full text-slate-400 text-xs gap-2"><p>아직 글이 없습니다.<br>(로컬 모드)</p></div>';
+                return;
+            }
+            list.innerHTML = msgs.map(m => renderMsg(m, m.id, 'local')).join('');
+        }
+
+        function loadLocalVisits() {
+            let v = parseInt(localStorage.getItem('local_visits') || '0') + 1;
+            localStorage.setItem('local_visits', v);
+            document.getElementById('visit-count').innerText = v.toLocaleString();
+        }
+
+        function renderMsg(data, id, type) {
+            const date = data.timestamp ? (data.timestamp.toDate ? new Date(data.timestamp.toDate()) : new Date(data.timestamp)).toLocaleDateString() : 'Just now';
+            return `
+                <div class="bg-white p-3 rounded-xl border border-emerald-50 shadow-sm animate__animated animate__fadeIn relative group">
+                    <button onclick="window.deleteMsg('${id}', '${type}')" class="absolute top-2 right-2 text-slate-300 hover:text-rose-500 transition-colors p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    <div class="flex justify-between items-center mb-1 pr-6">
+                        <span class="font-bold text-xs text-emerald-700">${data.name}</span>
+                        <span class="text-[10px] text-slate-400">${date}</span>
+                    </div>
+                    <p class="text-sm text-slate-700">${data.msg}</p>
+                </div>
+            `;
+        }
+
+        // 삭제 기능
+        window.deleteMsg = async (id, type) => {
+            if (!confirm("이 메시지를 삭제하시겠습니까?")) return;
+            
+            if (type === 'firebase' && db) {
+                try {
+                    await deleteDoc(doc(db, "guestbook", id));
+                } catch (e) {
+                    alert("삭제 실패: 권한이 부족하거나 오류가 발생했습니다.");
+                }
+            } else {
+                // 로컬 삭제
+                const msgs = JSON.parse(localStorage.getItem('local_guestbook') || '[]');
+                const newMsgs = msgs.filter(m => m.id !== id);
+                localStorage.setItem('local_guestbook', JSON.stringify(newMsgs));
+                loadLocalGuestbook();
+            }
+        };
+
+        window.handleGuestSubmit = async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('g-name').value;
+            const msg = document.getElementById('g-msg').value;
+            if (!name || !msg) return;
+
+            if (!isLocalMode && db) {
+                try {
+                    await addDoc(collection(db, "guestbook"), {
+                        name: name, msg: msg, timestamp: new Date()
+                    });
+                } catch (e) {
+                    alert("전송 실패. 로컬 모드로 전환합니다.");
+                    enableLocalMode(e.message);
+                    saveToLocal(name, msg);
+                }
+            } else {
+                saveToLocal(name, msg);
+            }
+            
+            document.getElementById('g-name').value = '';
+            document.getElementById('g-msg').value = '';
+        };
+
+        function saveToLocal(name, msg) {
+            const msgs = JSON.parse(localStorage.getItem('local_guestbook') || '[]');
+            msgs.unshift({ id: Date.now().toString(), name, msg, timestamp: new Date() });
+            localStorage.setItem('local_guestbook', JSON.stringify(msgs));
+            loadLocalGuestbook();
+        }
+
+        document.getElementById('guest-form').addEventListener('submit', window.handleGuestSubmit);
+    </script>
+
+    <!-- 일반 스크립트 (게임, 챗봇 등) -->
+    <script>
+        // === AI Key (하드코딩됨) ===
+        const GEMINI_API_KEY = "AIzaSyDUbyxJarLwFPXHnM7y3nSSeNdrJ0-BSSU";
+
+        // --- 1. 신장 게임 ---
+        const counts = { black: 0, tea: 0, mix: 0, ssb: 0 };
+        const states = [
+            { limit: 30, icon: "🤮", title: "위험해요!", color: "bg-rose-600", desc: "신장 과부하 상태입니다!" },
+            { limit: 60, icon: "😵‍💫", title: "부담스러워요", color: "bg-amber-500", desc: "당분 섭취가 너무 많아요." },
+            { limit: 85, icon: "🙂", title: "양호함", color: "bg-blue-500", desc: "수분 섭취 좋아요." },
+            { limit: 101, icon: "🫘", title: "최상의 컨디션", color: "bg-emerald-500", desc: "항산화 성분 가득!" }
         ];
 
-        function askBot(msg) {
-            document.getElementById('chat-input').value = msg;
-            handleChat();
-        }
+        window.addDrink = (t) => { counts[t]++; updateUI(t); };
+        window.resetDrinks = () => { for(let k in counts) counts[k]=0; updateUI(); };
+        window.pokeKidney = () => { 
+            const c = document.getElementById('kidney-char');
+            c.classList.add('animate__rubberBand');
+            setTimeout(()=>c.classList.remove('animate__rubberBand'), 1000);
+        };
 
-        async function handleChat() {
+        function updateUI(t) {
+            if(t) document.getElementById(`count-${t}`).innerText = counts[t];
+            else document.querySelectorAll('[id^="count-"]').forEach(e=>e.innerText='0');
+
+            let score = 100 + (counts.black*2) + (counts.tea*3) - (counts.mix*5) - (counts.ssb*10);
+            if(document.getElementById('check-diabetes').checked) score -= (counts.mix*2 + counts.ssb*5);
+            score = Math.max(0, Math.min(100, score));
+
+            const s = states.find(s => score < s.limit) || states[3];
+            document.getElementById('kidney-char').innerText = s.icon;
+            document.getElementById('status-title').innerText = s.title;
+            document.getElementById('status-desc').innerText = s.desc;
+            const bar = document.getElementById('health-bar');
+            bar.style.width = `${score}%`;
+            bar.className = `h-full w-full transition-all duration-500 ${s.color}`;
+        }
+        window.updateKidneyStatus = () => updateUI();
+
+        // --- 2. 챗봇 ---
+        window.handleChat = async () => {
             const input = document.getElementById('chat-input');
-            const history = document.getElementById('chat-window');
             const msg = input.value.trim();
-            if (!msg) return;
-
-            // 유저 메시지 표시
-            history.innerHTML += `<div class="flex gap-3 justify-end animate__animated animate__fadeInUp"><div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-md">${msg}</div></div>`;
-            input.value = '';
-            history.scrollTop = history.scrollHeight;
-
-            // 로딩 표시
-            const loadingId = 'loading-' + Date.now();
-            history.innerHTML += `<div id="${loadingId}" class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content"><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
-            history.scrollTop = history.scrollHeight;
-
-            // 답변 찾기 (지연 효과)
-            await new Promise(r => setTimeout(r, 700));
-            document.getElementById(loadingId).remove();
-
-            let reply = "죄송해요, 그 점에 대해서는 아직 데이터가 부족해요. 😅<br>대신 **'믹스커피', '블랙커피', '연구 방법', 'eGFR'** 같은 키워드로 물어봐 주시면 자세히 알려드릴게요!";
+            if(!msg) return;
             
-            // 키워드 매칭 로직
-            for (const item of knowledgeBase) {
-                if (item.keywords.some(k => msg.includes(k))) {
-                    reply = marked.parse(item.response);
-                    break;
-                }
-            }
+            const win = document.getElementById('chat-window');
+            win.innerHTML += `<div class="flex gap-3 justify-end animate__animated animate__fadeInUp"><div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none text-sm max-w-[85%]">${msg}</div></div>`;
+            input.value=''; win.scrollTop = win.scrollHeight;
 
-            history.innerHTML += `<div class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">${reply}</div></div>`;
-            history.scrollTop = history.scrollHeight;
-        }
-
-        document.getElementById('chat-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChat(); });
-
-        // --- 3. 차트 초기화 ---
-        function initCharts() {
-            new Chart(document.getElementById('nutrientChart').getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: ['블랙', '차', '믹스', '가당'],
-                    datasets: [
-                        { label: '카페인', data: [70, 30, 50, 0], backgroundColor: '#475569', borderRadius: 4 },
-                        { label: '당류', data: [0, 0, 6, 25], backgroundColor: '#fbbf24', borderRadius: 4 },
-                        { label: '지방', data: [0, 0, 1.5, 0], backgroundColor: '#f43f5e', borderRadius: 4 }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
-            });
-
-            new Chart(document.getElementById('hypothesisChart').getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: ['0잔', '1잔', '2잔', '3잔', '4+'],
-                    datasets: [
-                        { label: '차 (Tea)', data: [100, 102, 104, 105, 103], borderColor: '#10b981', tension: 0.4 },
-                        { label: '블랙커피', data: [100, 102, 103, 101, 98], borderColor: '#475569', tension: 0.4 },
-                        { label: '믹스커피', data: [100, 98, 95, 90, 85], borderColor: '#f59e0b', borderDash: [5, 5], tension: 0.4 },
-                        { label: '가당음료', data: [100, 95, 88, 75, 60], borderColor: '#f43f5e', borderDash: [2, 2], tension: 0.4 }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 50, max: 110 } } }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', initCharts);
+            win.innerHTML += `<div id="ai-loading" class="flex gap-3"><div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">👩‍🔬</div><div class="bg-white p-3 rounded-2xl rounded-tl-none border shadow-sm"><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+            win.scrollTop = win.scrollHeight;
+            
+            let reply = "";
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: msg }] }], systemInstruction: { parts: [{ text: "당신은 영양역학 연구원 조하늘입니다. 친절하고 전문적으로 답변하세요." }] } })
+                });
+                const data = await res.json();
+                reply = marked.parse(data.candidates[0].content.parts[0].text);
+            } catch(e) { reply = "AI 연결에 실패했습니다."; }
+            
+            document.getElementById('ai-loading').remove();
+            win.innerHTML += `<div class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">${reply}</div></div>`;
+            win.scrollTop = win.scrollHeight;
+        };
+        
+        document.getElementById('chat-input').addEventListener('keypress', (e)=>{if(e.key==='Enter') window.handleChat()});
     </script>
 </body>
 </html>
