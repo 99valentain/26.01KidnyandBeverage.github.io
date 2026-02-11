@@ -33,9 +33,10 @@
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* 채팅 스타일 */
-        .chat-content { font-size: 0.95rem; line-height: 1.6; }
+        .chat-content { font-size: 0.95rem; line-height: 1.6; word-break: keep-all; }
         .chat-content strong { color: #4F46E5; font-weight: 700; }
         .chat-content ul { list-style-type: disc; padding-left: 1.2rem; margin: 0.5rem 0; }
+        .chat-content li { margin-bottom: 0.3rem; }
         
         /* 버튼 바운스 효과 */
         .bounce-btn:active { transform: scale(0.95); }
@@ -45,11 +46,28 @@
             border-radius: 1.5rem;
             box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
         }
+
+        /* 챗봇 타이핑 애니메이션 */
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+            height: 6px;
+            width: 6px;
+            background-color: #6366F1;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-indigo-100 selection:text-indigo-900 pb-20">
 
-    <!-- 네비게이션 (심플하게 변경) -->
+    <!-- 네비게이션 -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-6xl mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
@@ -60,10 +78,10 @@
                         <p class="text-[11px] text-slate-500 mt-1">Mobile Interactive Dashboard</p>
                     </div>
                 </div>
-                <!-- 탭 메뉴 (가로 스크롤) -->
+                <!-- 탭 메뉴 -->
                 <div class="flex gap-2 text-sm font-bold text-slate-500">
                     <a href="#lab" class="px-3 py-1.5 rounded-full bg-slate-100 text-indigo-600">실험실</a>
-                    <a href="#chat" class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-600">챗봇</a>
+                    <a href="#chat" class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-600">AI 하늘씨</a>
                 </div>
             </div>
         </div>
@@ -71,9 +89,8 @@
 
     <main class="max-w-3xl mx-auto px-4 py-6 space-y-12">
 
-        <!-- 섹션 1: 연구 개요 (Hero) -->
+        <!-- 섹션 1: 연구 개요 (Research Key Metrics 복구됨) -->
         <section id="overview" class="mobile-card bg-gradient-to-br from-stone-800 to-stone-700 p-6 text-white overflow-hidden relative">
-            <!-- 배경 효과 -->
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-500/20 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-stone-500/30 rounded-full blur-3xl"></div>
 
@@ -83,8 +100,8 @@
                         2026년 1월 연구과제
                     </div>
                     <h2 class="text-3xl font-extrabold mb-3 leading-tight">
-                        한국인의 커피,<br>
-                        <span class="text-stone-300">신장</span>에 약일까?
+                        한국인의 커피 습관,<br>
+                        <span class="text-stone-300">신장(Kidney)</span>에 약일까?
                     </h2>
                     <p class="text-stone-300 text-sm leading-relaxed font-light">
                         블랙커피 vs 믹스커피.<br>
@@ -92,26 +109,26 @@
                     </p>
                 </div>
 
-                <!-- Research Key Metrics (모바일 최적화) -->
+                <!-- Research Key Metrics 카드 -->
                 <div class="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/10 shadow-inner">
                     <h3 class="text-[10px] font-bold text-stone-300 uppercase tracking-widest mb-4 border-b border-white/10 pb-2">Research Key Metrics</h3>
                     <div class="space-y-5">
                         <div>
                             <div class="flex justify-between text-xs mb-1.5">
                                 <span class="text-stone-300">분석 데이터</span>
-                                <span class="font-bold text-yellow-400">KNHANES</span>
+                                <span class="font-bold text-yellow-400">KNHANES (국건영)</span>
                             </div>
                             <div class="w-full bg-stone-700/50 h-1.5 rounded-full overflow-hidden">
-                                <div class="bg-yellow-400 h-full" style="width: 100%"></div>
+                                <div class="bg-yellow-400 h-full shadow-[0_0_10px_rgba(250,204,21,0.6)]" style="width: 100%"></div>
                             </div>
                         </div>
                         <div>
                             <div class="flex justify-between text-xs mb-1.5">
-                                <span class="text-stone-300">타겟 변수</span>
+                                <span class="text-stone-300">주요 타겟 변수</span>
                                 <span class="font-bold text-emerald-400">eGFR (사구체여과율)</span>
                             </div>
                             <div class="w-full bg-stone-700/50 h-1.5 rounded-full overflow-hidden">
-                                <div class="bg-emerald-400 h-full" style="width: 85%"></div>
+                                <div class="bg-emerald-400 h-full shadow-[0_0_10px_rgba(52,211,153,0.6)]" style="width: 85%"></div>
                             </div>
                         </div>
                         <div>
@@ -121,15 +138,18 @@
                             </div>
                             <div class="flex gap-1 h-1.5">
                                 <div class="bg-stone-900 w-1/2 rounded-l-full"></div>
-                                <div class="bg-orange-300 w-1/2 rounded-r-full"></div>
+                                <div class="bg-orange-300 w-1/2 rounded-r-full shadow-[0_0_10px_rgba(253,186,116,0.6)]"></div>
                             </div>
                         </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 text-[10px] text-stone-400 leading-relaxed opacity-70">
+                        * 교란 변수 통제: 연령, 성별, BMI, 흡연, 음주, 고혈압, 당뇨병 등 다변량 분석 적용
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 섹션 2: 신장 지키기 게임 (모바일 터치 최적화) -->
+        <!-- 섹션 2: 신장 지키기 게임 -->
         <section id="lab" class="mobile-card bg-white p-6 border border-slate-100 relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-500"></div>
             
@@ -153,39 +173,31 @@
                     "항산화 성분으로 보호받고 있어요!"
                 </p>
 
-                <!-- 게이지 -->
                 <div class="w-full mt-5 bg-slate-200 rounded-full h-2.5 overflow-hidden">
                     <div id="health-bar" class="bg-emerald-500 h-full w-full transition-all duration-700 ease-out"></div>
                 </div>
             </div>
 
-            <!-- 컨트롤 패널 (2열 그리드) -->
+            <!-- 컨트롤 패널 -->
             <div class="grid grid-cols-2 gap-3 mb-4">
-                <!-- 차 -->
                 <button onclick="addDrink('tea')" class="bounce-btn bg-emerald-50 border border-emerald-100 rounded-xl p-3 flex flex-col items-center relative active:bg-emerald-100">
                     <span class="text-3xl mb-1">🍵</span>
                     <span class="font-bold text-sm text-slate-700">녹차/홍차</span>
                     <span class="text-[10px] text-emerald-600 font-medium">+ 항산화 (Good)</span>
                     <span id="count-tea" class="absolute top-2 right-2 bg-white text-emerald-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm border border-emerald-100">0</span>
                 </button>
-                
-                <!-- 블랙커피 -->
                 <button onclick="addDrink('black')" class="bounce-btn bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center relative active:bg-slate-100">
                     <span class="text-3xl mb-1">☕</span>
                     <span class="font-bold text-sm text-slate-700">블랙커피</span>
                     <span class="text-[10px] text-slate-500 font-medium">적당히 (Okay)</span>
                     <span id="count-black" class="absolute top-2 right-2 bg-white text-slate-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm border border-slate-200">0</span>
                 </button>
-
-                <!-- 믹스커피 -->
                 <button onclick="addDrink('mix')" class="bounce-btn bg-amber-50 border border-amber-100 rounded-xl p-3 flex flex-col items-center relative active:bg-amber-100">
                     <span class="text-3xl mb-1">🍬</span>
                     <span class="font-bold text-sm text-slate-700">믹스커피</span>
                     <span class="text-[10px] text-amber-600 font-medium">- 당분/프림 (Bad)</span>
                     <span id="count-mix" class="absolute top-2 right-2 bg-white text-amber-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm border border-amber-100">0</span>
                 </button>
-
-                <!-- 가당음료 -->
                 <button onclick="addDrink('ssb')" class="bounce-btn bg-rose-50 border border-rose-100 rounded-xl p-3 flex flex-col items-center relative active:bg-rose-100">
                     <span class="text-3xl mb-1">🥤</span>
                     <span class="font-bold text-sm text-slate-700">탄산/주스</span>
@@ -194,43 +206,57 @@
                 </button>
             </div>
 
-            <!-- 당뇨 옵션 -->
             <label class="flex items-center justify-center gap-2 p-3 bg-slate-50 rounded-xl cursor-pointer active:bg-slate-100 border border-slate-200">
                 <input type="checkbox" id="check-diabetes" class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500" onchange="updateKidneyStatus()">
                 <span class="text-sm font-bold text-slate-600">🩸 당뇨병 있음 (위험도 증가)</span>
             </label>
         </section>
 
-        <!-- 섹션 3: 챗봇 (API 없음, 룰 기반) -->
-        <section id="chat" class="mobile-card bg-white border border-slate-100 shadow-xl flex flex-col h-[500px] overflow-hidden">
+        <!-- 섹션 3: AI 하늘씨 (챗봇 - 지식 대폭 확장) -->
+        <section id="chat" class="mobile-card bg-white border border-slate-100 shadow-xl flex flex-col h-[550px] overflow-hidden">
             <div class="p-4 bg-indigo-50/50 border-b border-indigo-50 flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></span>
                     <span class="font-bold text-slate-700">AI 하늘씨.</span>
                 </div>
-                <span class="text-[10px] text-indigo-400 font-medium">Auto-Reply Mode</span>
+                <button onclick="document.getElementById('chat-help').classList.toggle('hidden')" class="text-xs text-indigo-500 bg-white px-2 py-1 rounded border border-indigo-100">❓ 질문 팁</button>
+            </div>
+
+            <!-- 도움말 박스 (초기 숨김) -->
+            <div id="chat-help" class="hidden bg-indigo-50 p-4 text-xs text-indigo-800 border-b border-indigo-100">
+                <p class="font-bold mb-1">💡 이런 걸 물어보세요:</p>
+                <div class="grid grid-cols-2 gap-1">
+                    <span>• "연구 대상은 누구야?"</span>
+                    <span>• "물은 얼마나 마셔?"</span>
+                    <span>• "카페인은 괜찮아?"</span>
+                    <span>• "당뇨인데 커피 마셔도 돼?"</span>
+                    <span>• "eGFR 수치가 뭐야?"</span>
+                    <span>• "믹스커피 성분 알려줘"</span>
+                </div>
             </div>
 
             <div id="chat-window" class="flex-1 p-4 overflow-y-auto space-y-4 bg-white">
                 <div class="flex gap-3">
                     <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div>
                     <div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">
-                        안녕하세요! 저는 음료와 신장 건강을 연구하는 <strong>AI 하늘씨.</strong>입니다.<br><br>
-                        <strong>'믹스커피', '블랙커피', '녹차', '가당음료'</strong> 중 궁금한 단어를 입력해보세요. 제가 아주 상세하게 설명해 드릴게요! 🧐
+                        안녕하세요! <strong>AI 하늘씨.</strong>입니다.<br>
+                        더 다양한 질문에 답할 수 있도록 공부를 많이 했어요! 📚<br><br>
+                        "물은 얼마나 마셔야 해?", "연구 방법이 뭐야?", "당뇨에 커피는?" 처럼 자유롭게 물어봐주세요.
                     </div>
                 </div>
             </div>
 
             <!-- 추천 질문 (가로 스크롤) -->
             <div class="px-4 py-2 flex gap-2 overflow-x-auto hide-scrollbar bg-white border-t border-slate-50">
-                <button onclick="askBot('믹스커피가 위험해?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">믹스커피 위험성?</button>
-                <button onclick="askBot('녹차 효능은?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">녹차 효능?</button>
-                <button onclick="askBot('eGFR이 뭐야?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">eGFR이란?</button>
+                <button onclick="askBot('연구 대상')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">연구 대상?</button>
+                <button onclick="askBot('카페인 영향')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">카페인 영향</button>
+                <button onclick="askBot('물 섭취량')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">물 마시기</button>
+                <button onclick="askBot('연구 방법')" class="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-100 text-slate-600 text-xs rounded-full active:bg-slate-100">연구 방법</button>
             </div>
 
             <div class="p-4 bg-white border-t border-slate-100">
                 <div class="flex gap-2 relative">
-                    <input type="text" id="chat-input" placeholder="키워드 입력 (예: 당뇨)" class="w-full bg-slate-50 border-0 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                    <input type="text" id="chat-input" placeholder="궁금한 내용을 입력하세요..." class="w-full bg-slate-50 border-0 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
                     <button onclick="handleChat()" class="absolute right-2 top-2 bg-indigo-600 text-white p-1.5 rounded-lg active:bg-indigo-700 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" /></svg>
                     </button>
@@ -238,7 +264,7 @@
             </div>
         </section>
 
-        <!-- 섹션 4: 통합 차트 (세로 배치) -->
+        <!-- 섹션 4: 차트 -->
         <section id="analysis" class="space-y-6">
             <div class="mobile-card bg-white p-6 border border-slate-100">
                 <h4 class="font-bold text-lg text-slate-800 mb-4 text-center flex items-center justify-center gap-2">
@@ -258,25 +284,12 @@
             </div>
         </section>
 
-        <!-- 랜덤 상식 -->
-        <section class="mobile-card bg-indigo-600 p-6 text-white text-center">
-            <h3 class="text-xl font-bold mb-4">🎲 랜덤 영양 상식</h3>
-            <div id="fact-card" class="bg-white/10 p-4 rounded-xl min-h-[80px] flex items-center justify-center mb-4 border border-white/20">
-                <p id="fact-text" class="text-sm">"가당음료를 매일 마시면 신장 결석 위험이 23% 증가합니다."</p>
-            </div>
-            <button onclick="showRandomFact()" class="w-full bg-white text-indigo-600 py-3 rounded-xl font-bold text-sm active:bg-indigo-50">
-                새로운 지식 확인하기
-            </button>
-        </section>
-
-        <!-- 푸터 -->
         <section class="text-center pt-8 pb-10">
             <p class="text-slate-400 text-xs font-medium">© 2026 하늘씨.</p>
         </section>
 
     </main>
 
-    <!-- 스크립트 (API 관련 코드 없음) -->
     <script>
         // --- 1. 신장 게임 로직 ---
         const counts = { black: 0, tea: 0, mix: 0, ssb: 0 };
@@ -309,10 +322,7 @@
             let score = 100;
             score += (counts.black * 2) + (counts.tea * 3);
             score -= (counts.mix * 5) + (counts.ssb * 10);
-            
-            const hasDiabetes = document.getElementById('check-diabetes').checked;
-            if (hasDiabetes) score -= (counts.mix * 2) + (counts.ssb * 5);
-
+            if (document.getElementById('check-diabetes').checked) score -= (counts.mix * 2) + (counts.ssb * 5);
             score = Math.max(0, Math.min(100, score));
 
             let state = 'great';
@@ -321,12 +331,11 @@
             else if (score < 85) state = 'good';
 
             const charEl = document.getElementById('kidney-char');
-            const barEl = document.getElementById('health-bar');
-            
             charEl.innerText = kidneyStates[state].icon;
             document.getElementById('status-title').innerText = kidneyStates[state].title;
             document.getElementById('status-desc').innerText = kidneyStates[state].desc;
             
+            const barEl = document.getElementById('health-bar');
             barEl.style.width = `${score}%`;
             barEl.className = `h-full w-full transition-all duration-500 ease-out ${kidneyStates[state].color}`;
             
@@ -339,17 +348,49 @@
             }, 1000);
         }
 
-        // --- 2. 챗봇 (상세 답변 로직) ---
-        const botResponses = {
-            "믹스": "믹스커피는 한국인의 소울 푸드지만, 신장에는 부담이 될 수 있어요. 😥<br><br>주성분인 **설탕과 프림(포화지방)**은 혈당과 콜레스테롤을 높여 **대사증후군**을 유발할 수 있거든요. 대사증후군은 신장 기능을 떨어뜨리는 주요 원인이 됩니다.<br><br>👉 가급적 하루 1잔 이하로 줄이시거나, 설탕을 뺀 블랙커피로 바꾸시는 걸 추천드려요!",
-            "블랙": "블랙커피는 적당히 드시면 신장에 친구가 될 수 있어요! ☕<br><br>커피 속 **폴리페놀(항산화 성분)**이 염증을 줄여주기 때문이죠. 여러 연구에서 하루 3잔 정도의 블랙커피는 신장 질환 위험을 낮춘다는 결과가 있습니다.<br><br>👉 단, 카페인에 민감하시거나 불면증이 있다면 조절이 필요해요.",
-            "녹차": "녹차나 홍차는 아주 훌륭한 선택이에요! 🍵<br><br>**카테킨** 같은 강력한 항산화 성분이 혈관을 건강하게 하고, 신장 세포를 보호하는 데 도움을 줍니다. 또한 수분 섭취를 돕기 때문에 신장 결석 예방에도 긍정적이죠.<br><br>👉 설탕 없이 맑게 우려 드시는 게 가장 좋습니다.",
-            "가당": "가당음료(탄산, 주스)는 신장에 **가장 위험한 적**입니다! 🚨<br><br>액상과당은 체내에서 요산 수치를 높여 신장 결석을 유발하고, 급격한 혈당 상승으로 신장 여과기(사구체)를 망가뜨립니다.<br><br>👉 갈증 날 땐 음료수 대신 물이나 탄산수를 드시는 게 어떨까요?",
-            "당뇨": "당뇨병 환자분들은 혈당 관리가 곧 신장 관리입니다. 🩸<br><br>믹스커피나 가당음료처럼 혈당을 빠르게 올리는 음료는 **치명적**일 수 있어요. 신장 합병증을 막기 위해 당분 섭취를 엄격히 제한하고, 물이나 녹차 위주로 수분을 섭취해 주세요!",
-            "egfr": "**eGFR(사구체여과율)**은 신장이 1분에 얼마나 많은 피를 깨끗하게 걸러내는지를 보여주는 '신장 성적표'예요. 💯<br><br>• <strong>90 이상:</strong> 아주 건강함<br>• <strong>60~89:</strong> 약간의 기능 감소 (주의)<br>• <strong>60 미만:</strong> 신장 기능 저하 의심 (전문의 상담 필요)<br><br>이 수치를 잘 지키는 것이 중요합니다!",
-            "연구": "본 연구는 2026년 1월부터 경희대학교에서 진행 중입니다. 👩‍🔬<br><br>서구권 연구와 달리, 한국인의 특성인 **'믹스커피'** 섭취가 신장에 미치는 영향을 중점적으로 분석하고 있어요. 우리의 식습관에 맞는 건강 가이드를 만드는 것이 목표랍니다!",
-            "default": "죄송해요, 제가 아직 배우고 있는 중이라 어려운 말은 잘 모르겠어요. 😅<br><br>대신 <strong>'믹스커피', '블랙커피', '녹차', '가당음료', 'eGFR'</strong> 같은 단어로 물어봐 주시면 제가 아는 한에서 아주 자세히 설명해 드릴게요!"
-        };
+        // --- 2. 챗봇 지식베이스 (대폭 확장) ---
+        const knowledgeBase = [
+            {
+                keywords: ["믹스", "프림", "봉지", "자판기"],
+                response: "### 믹스커피 (Mix Coffee)\n믹스커피는 한국인의 '소울 푸드'지만 신장에는 부담이 될 수 있어요.\n- **위험 요인:** 설탕과 프림(포화지방) 함량이 높아 혈당과 중성지방 수치를 높입니다.\n- **신장에 미치는 영향:** 대사증후군을 유발하여 장기적으로 eGFR(사구체여과율)을 떨어뜨리는 간접적인 원인이 됩니다.\n- **권장:** 하루 1잔 이하로 줄이시거나, 블랙커피로 대체하는 것이 좋습니다."
+            },
+            {
+                keywords: ["블랙", "아메리카노", "드립", "원두", "에스프레소"],
+                response: "### 블랙커피 (Black Coffee)\n적당한 블랙커피는 신장에 긍정적일 수 있습니다! ☕\n- **이점:** 커피 속의 '폴리페놀(클로로겐산)'은 강력한 항산화제로, 신장의 염증을 줄여줍니다.\n- **주의점:** 카페인은 일시적으로 혈압을 높일 수 있으므로, 고혈압 환자는 주의가 필요합니다.\n- **권장:** 하루 2~3잔 정도가 적당합니다."
+            },
+            {
+                keywords: ["녹차", "홍차", "차", "티"],
+                response: "### 차 (Tea)\n녹차와 홍차는 신장 건강의 든든한 지원군입니다. 🍵\n- **카테킨:** 강력한 항산화 성분으로 혈관 내피세포를 보호합니다.\n- **수분 섭취:** 충분한 차 섭취는 소변량을 늘려 신장 결석 예방에 도움을 줍니다.\n- **팁:** 설탕을 넣지 않고 맑게 우려 드시는 것이 가장 좋습니다."
+            },
+            {
+                keywords: ["가당", "탄산", "주스", "콜라", "사이다", "에이드", "액상과당"],
+                response: "### 가당음료 (SSBs)\n신장에 **가장 위험한 음료** 1위입니다! 🚨\n- **액상과당:** 요산 수치를 급격히 높여 통풍과 신장 결석을 유발합니다.\n- **인슐린 저항성:** 급격한 혈당 상승은 신장 여과기(사구체)에 직접적인 손상을 줍니다.\n- **결론:** 목이 마를 땐 음료수 대신 **물**을 드세요!"
+            },
+            {
+                keywords: ["eGFR", "사구체", "여과율", "수치", "점수"],
+                response: "### eGFR (추정 사구체여과율)\n신장의 기능을 나타내는 성적표입니다. 💯\n- **90 이상:** 정상 (아주 건강함)\n- **60 ~ 89:** 경도 감소 (관리가 필요함)\n- **60 미만:** 만성콩팥병(CKD) 의심 단계\n\n이 수치가 떨어지지 않도록 짜게 먹지 않고, 당분을 줄이는 것이 핵심입니다."
+            },
+            {
+                keywords: ["당뇨", "혈당"],
+                response: "### 당뇨병과 신장\n당뇨병은 만성콩팥병의 **제1 원인**입니다. 🩸\n혈액 속의 과도한 당분이 신장의 미세혈관을 막아버리기 때문입니다.\n- **필수 수칙:** 믹스커피와 주스 섭취를 엄격히 제한하고, 정기적으로 소변 검사를 받아야 합니다."
+            },
+            {
+                keywords: ["연구", "대상", "참여자", "누구", "데이터"],
+                response: "### 연구 개요\n- **데이터:** 질병관리청의 **국민건강영양조사(KNHANES)** 데이터를 사용했습니다.\n- **대상:** 만 19세~64세의 대한민국 성인 남녀\n- **목적:** 서구권과 달리 '믹스커피'를 많이 마시는 한국인의 특성이 신장 기능에 어떤 영향을 주는지 밝히는 것입니다."
+            },
+            {
+                keywords: ["방법", "분석", "통계", "로지스틱"],
+                response: "### 연구 방법론\n정확한 분석을 위해 다음과 같은 통계 기법을 사용했습니다.\n1. **다변량 로지스틱 회귀분석:** 나이, 성별, 흡연, 음주 등 다른 요인들의 영향을 배제하고 순수하게 음료의 영향만 계산했습니다.\n2. **그룹 분류:** 비섭취군, 블랙커피군, 믹스커피군, 가당음료군 등으로 나누어 eGFR 수치를 비교했습니다."
+            },
+            {
+                keywords: ["물", "수분"],
+                response: "### 물 섭취 가이드\n신장 건강의 기본은 **충분한 물 섭취**입니다. 💧\n- 물은 혈액을 묽게 만들어 신장의 여과 부담을 줄여줍니다.\n- 하루 1.5L ~ 2L 정도의 미지근한 물을 조금씩 자주 드시는 것을 추천합니다."
+            },
+            {
+                keywords: ["카페인", "디카페인"],
+                response: "### 카페인 영향\n카페인은 이뇨 작용이 있어 일시적으로 탈수를 유발할 수 있지만, 신장 기능 자체를 망가뜨리지는 않습니다.\n다만, **신장 낭종**이 있거나 **고혈압**이 심한 경우에는 디카페인 커피를 드시는 것이 안전합니다."
+            }
+        ];
 
         function askBot(msg) {
             document.getElementById('chat-input').value = msg;
@@ -362,40 +403,37 @@
             const msg = input.value.trim();
             if (!msg) return;
 
-            // 유저 메시지
+            // 유저 메시지 표시
             history.innerHTML += `<div class="flex gap-3 justify-end animate__animated animate__fadeInUp"><div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-md">${msg}</div></div>`;
             input.value = '';
             history.scrollTop = history.scrollHeight;
 
-            // 로딩 UI
+            // 로딩 표시
             const loadingId = 'loading-' + Date.now();
-            history.innerHTML += `<div id="${loadingId}" class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
+            history.innerHTML += `<div id="${loadingId}" class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content"><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
             history.scrollTop = history.scrollHeight;
 
-            // 답변 지연 (자연스러움)
-            await new Promise(r => setTimeout(r, 600));
-
-            let reply = "";
-            if (msg.includes("믹스")) reply = botResponses["믹스"];
-            else if (msg.includes("블랙") || msg.includes("아메리카노")) reply = botResponses["블랙"];
-            else if (msg.includes("녹차") || msg.includes("홍차") || msg.includes("차")) reply = botResponses["녹차"];
-            else if (msg.includes("가당") || msg.includes("탄산") || msg.includes("주스") || msg.includes("콜라")) reply = botResponses["가당"];
-            else if (msg.includes("당뇨")) reply = botResponses["당뇨"];
-            else if (msg.toLowerCase().includes("egfr") || msg.includes("수치") || msg.includes("점수")) reply = botResponses["egfr"];
-            else if (msg.includes("연구") || msg.includes("결과")) reply = botResponses["연구"];
-            else reply = botResponses["default"];
-
-            // 마크다운 처리
-            reply = marked.parse(reply);
-
+            // 답변 찾기 (지연 효과)
+            await new Promise(r => setTimeout(r, 700));
             document.getElementById(loadingId).remove();
+
+            let reply = "죄송해요, 그 점에 대해서는 아직 데이터가 부족해요. 😅<br>대신 **'믹스커피', '블랙커피', '연구 방법', 'eGFR'** 같은 키워드로 물어봐 주시면 자세히 알려드릴게요!";
+            
+            // 키워드 매칭 로직
+            for (const item of knowledgeBase) {
+                if (item.keywords.some(k => msg.includes(k))) {
+                    reply = marked.parse(item.response);
+                    break;
+                }
+            }
+
             history.innerHTML += `<div class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">${reply}</div></div>`;
             history.scrollTop = history.scrollHeight;
         }
 
         document.getElementById('chat-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChat(); });
 
-        // --- 3. 차트 & 랜덤 상식 ---
+        // --- 3. 차트 초기화 ---
         function initCharts() {
             new Chart(document.getElementById('nutrientChart').getContext('2d'), {
                 type: 'bar',
@@ -425,23 +463,6 @@
             });
         }
 
-        const facts = [
-            "⚠️ 믹스커피 1잔 = 각설탕 2개!",
-            "🍵 녹차는 CKD 위험을 낮출 수 있어요.",
-            "🩸 고혈당은 신장의 적입니다.",
-            "🥤 탄산음료는 신장 결석 위험을 높여요."
-        ];
-
-        function showRandomFact() {
-            const text = document.getElementById('fact-text');
-            text.parentElement.classList.add('animate__animated', 'animate__flipInX');
-            setTimeout(() => {
-                text.innerText = facts[Math.floor(Math.random() * facts.length)];
-            }, 300);
-            setTimeout(() => text.parentElement.classList.remove('animate__animated', 'animate__flipInX'), 1000);
-        }
-
-        // 실행
         document.addEventListener('DOMContentLoaded', initCharts);
     </script>
 </body>
