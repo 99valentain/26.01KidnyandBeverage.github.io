@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <!-- 탭 메뉴 (방명록 제거) -->
+            <!-- 탭 메뉴 (방명록 버튼 삭제) -->
             <div class="flex gap-2 overflow-x-auto hide-scrollbar px-4 pb-2 mt-2 border-t border-slate-50 pt-2">
                 <a href="#lab" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-sky-600 bg-sky-50 rounded-full hover:bg-sky-100 transition">실험실</a>
                 <a href="#chat" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-slate-600 bg-slate-50 rounded-full hover:bg-slate-100 transition">AI 하늘씨</a>
@@ -72,7 +72,7 @@
 
     <main class="max-w-3xl mx-auto px-4 py-6 space-y-12">
 
-        <!-- 섹션 1: 연구 개요 -->
+        <!-- 섹션 1: 연구 개요 (디자인 복구됨) -->
         <section id="overview" class="mobile-card bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-7 text-white overflow-hidden relative shadow-2xl shadow-blue-900/20">
             <div class="absolute -top-20 -right-20 w-60 h-60 bg-sky-500/20 rounded-full blur-[60px]"></div>
             <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-indigo-500/30 rounded-full blur-[60px]"></div>
@@ -92,6 +92,7 @@
                     </p>
                 </div>
 
+                <!-- Research Key Metrics 카드 (복구됨) -->
                 <div class="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-inner group">
                     <h3 class="text-[10px] font-bold text-sky-200 uppercase tracking-[0.2em] mb-6 border-b border-white/5 pb-3">Research Key Metrics</h3>
                     <div class="space-y-6">
@@ -100,17 +101,37 @@
                                 <span class="text-slate-300 font-medium">분석 데이터</span>
                                 <span class="font-bold text-yellow-300">KNHANES (국건영)</span>
                             </div>
-                            <div class="w-full bg-slate-800/50 h-2 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-yellow-300 to-yellow-500 h-full" style="width: 100%"></div>
+                            <div class="w-full bg-slate-800/50 h-2 rounded-full overflow-hidden ring-1 ring-white/5">
+                                <div class="bg-gradient-to-r from-yellow-300 to-yellow-500 h-full shadow-[0_0_12px_rgba(253,224,71,0.4)]" style="width: 100%"></div>
                             </div>
                         </div>
+                        
                         <div>
                             <div class="flex justify-between text-xs mb-2">
                                 <span class="text-slate-300 font-medium">주요 타겟 변수</span>
                                 <span class="font-bold text-sky-300">eGFR (사구체여과율)</span>
                             </div>
-                            <div class="w-full bg-slate-800/50 h-2 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-sky-300 to-sky-500 h-full" style="width: 85%"></div>
+                            <div class="w-full bg-slate-800/50 h-2 rounded-full overflow-hidden ring-1 ring-white/5">
+                                <div class="bg-gradient-to-r from-sky-300 to-sky-500 h-full shadow-[0_0_12px_rgba(125,211,252,0.4)]" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-xs mb-2">
+                                <span class="text-slate-300 font-medium">분석 음료군</span>
+                                <span class="font-bold text-white">4개 그룹 (커피/차/가당)</span>
+                            </div>
+                            <div class="flex gap-1 h-2">
+                                <div class="bg-slate-500 w-1/4 rounded-l-full" title="블랙"></div>
+                                <div class="bg-emerald-400 w-1/4" title="차"></div>
+                                <div class="bg-yellow-400 w-1/4" title="믹스"></div>
+                                <div class="bg-rose-500 w-1/4 rounded-r-full" title="가당"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1.5 px-1 font-medium">
+                                <span class="text-slate-400">블랙</span>
+                                <span class="text-emerald-300">차</span>
+                                <span class="text-yellow-300">믹스</span>
+                                <span class="text-rose-400">가당</span>
                             </div>
                         </div>
                     </div>
@@ -122,6 +143,7 @@
         <section id="lab" class="mobile-card bg-white p-6 border border-slate-100 relative overflow-hidden">
             <div class="text-center mb-6">
                 <h2 class="text-2xl font-bold text-slate-900">🧪 내 신장 다마고치</h2>
+                <p class="text-slate-500 text-xs mt-1">버튼을 터치해 음료를 마셔보세요!</p>
             </div>
 
             <div class="bg-slate-50 rounded-2xl p-6 flex flex-col items-center justify-center mb-6 border border-slate-200">
@@ -157,7 +179,7 @@
                 <div class="flex gap-3">
                     <div class="flex-shrink-0 w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div>
                     <div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">
-                        안녕하세요! <strong>AI 하늘씨.</strong>입니다.<br>궁금한 점을 물어보시면 답변해 드려요!
+                        안녕하세요! <strong>AI 하늘씨.</strong>입니다.<br>궁금한 점을 물어보시면 데이터를 기반으로 답변해 드려요!
                     </div>
                 </div>
             </div>
@@ -169,13 +191,15 @@
 
         <!-- 푸터 -->
         <section class="text-center pt-8 pb-10">
-            <p class="text-slate-400 text-xs font-medium">© 2026 하늘씨.</p>
+            <p class="text-slate-400 text-[11px] font-medium leading-relaxed px-6">
+                © (2026) 하늘씨 : AI가 거짓말을 아주 잘해서요..<br>
+                사실 기반 근거자료가 아닌 것을 가져올 수 있으니. 주의하시기 바랍니다 :)
+            </p>
         </section>
 
     </main>
 
     <script>
-        // === 하드코딩된 API KEY ===
         const GEMINI_API_KEY = "AIzaSyDUbyxJarLwFPXHnM7y3nSSeNdrJ0-BSSU";
 
         // --- Game Logic ---
@@ -225,20 +249,20 @@
             win.innerHTML += `<div id="ai-loading" class="flex gap-3"><div class="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center">👩‍🔬</div><div class="bg-white p-3 rounded-2xl rounded-tl-none border shadow-sm"><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
             win.scrollTop = win.scrollHeight;
             
-            let reply = "";
             try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                     method: 'POST', headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ contents: [{ parts: [{ text: msg }] }] })
                 });
                 const data = await res.json();
-                reply = marked.parse(data.candidates[0].content.parts[0].text);
-            } catch(e) { reply = "AI 답변을 불러오는 데 실패했습니다."; }
-            
-            const loading = document.getElementById('ai-loading');
-            if(loading) loading.remove();
-            
-            win.innerHTML += `<div class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">${reply}</div></div>`;
+                const reply = marked.parse(data.candidates[0].content.parts[0].text);
+                
+                document.getElementById('ai-loading').remove();
+                win.innerHTML += `<div class="flex gap-3 animate__animated animate__fadeInUp"><div class="flex-shrink-0 w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div><div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">${reply}</div></div>`;
+            } catch(e) { 
+                document.getElementById('ai-loading').remove();
+                win.innerHTML += `<div class="text-xs text-rose-500 text-center p-2">답변을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</div>`;
+            }
             win.scrollTop = win.scrollHeight;
         };
         
