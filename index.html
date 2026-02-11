@@ -188,7 +188,7 @@
             </div>
         </section>
 
-        <!-- 섹션 4: 공유 방명록 (삭제 기능 추가) -->
+        <!-- 섹션 4: 공유 방명록 (자동 복구 기능) -->
         <section id="guestbook" class="mobile-card bg-white p-6 border border-emerald-100 shadow-lg relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
             
@@ -229,7 +229,7 @@
 
     </main>
 
-    <!-- Firebase 모듈 스크립트 -->
+    <!-- Firebase 모듈 스크립트 (자동 복구 로직) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, getDoc, setDoc, updateDoc, increment, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -248,15 +248,16 @@
         let db = null;
         let isLocalMode = false;
 
+        // 로컬 모드 전환 함수 (에러 발생 시 호출)
         function enableLocalMode(reason) {
             if (isLocalMode) return;
             isLocalMode = true;
-            console.warn("Switching to Local Mode:", reason);
+            console.warn("Firebase Error (Auto-Fallback to Local):", reason);
             
             const statusEl = document.getElementById('db-status');
             if (statusEl) {
-                statusEl.innerHTML = '<span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span> 로컬 모드';
-                statusEl.className = "text-[10px] text-slate-500 bg-slate-100 px-2 py-1 rounded-full flex items-center gap-1 font-bold";
+                statusEl.innerHTML = '<span class="w-1.5 h-1.5 bg-amber-400 rounded-full"></span> 로컬 모드';
+                statusEl.className = "text-[10px] text-amber-600 bg-amber-50 px-2 py-1 rounded-full flex items-center gap-1 font-bold";
             }
             loadLocalGuestbook();
             loadLocalVisits();
@@ -268,19 +269,22 @@
             initFirestoreListeners();
             updateVisitCount();
         } catch (e) {
-            enableLocalMode("Initial connection failed");
+            enableLocalMode("Initialization failed");
         }
 
         function initFirestoreListeners() {
             if (!db) return;
             try {
                 const q = query(collection(db, "guestbook"), orderBy("timestamp", "desc"), limit(50));
+                
                 onSnapshot(q, (snapshot) => {
+                    // 성공 시 상태 업데이트
                     const statusEl = document.getElementById('db-status');
                     if (statusEl && !isLocalMode) {
                         statusEl.innerHTML = '<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> 실시간 연결됨';
                         statusEl.className = "text-[10px] text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full flex items-center gap-1 font-bold";
                     }
+                    
                     const list = document.getElementById('msg-list');
                     if (snapshot.empty) {
                         list.innerHTML = '<p class="text-xs text-center text-slate-400 py-8">아직 작성된 글이 없습니다.<br>첫 글을 남겨주세요!</p>';
@@ -288,6 +292,7 @@
                     }
                     list.innerHTML = snapshot.docs.map(doc => renderMsg(doc.data(), doc.id, 'firebase')).join('');
                 }, (error) => {
+                    // 권한 없음 등의 에러 시 로컬 모드로 전환
                     enableLocalMode(error.message);
                 });
             } catch (e) {
@@ -299,19 +304,26 @@
             if (!db) return;
             const counterRef = doc(db, "meta", "visits");
             try {
-                await updateDoc(counterRef, { count: increment(1) }).catch(async () => {
-                    try { await setDoc(counterRef, { count: 1 }); } catch(e) { throw e; }
+                // 쓰기 시도 (권한 체크)
+                await updateDoc(counterRef, { count: increment(1) }).catch(async (e) => {
+                    if (e.code === 'not-found') {
+                        try { await setDoc(counterRef, { count: 1 }); } catch(err) { throw err; }
+                    } else {
+                        throw e;
+                    }
                 });
+                
                 onSnapshot(counterRef, (doc) => {
                     if (doc.exists()) {
                         document.getElementById('visit-count').innerText = doc.data().count.toLocaleString();
                     }
-                });
+                }, (error) => {}); // Read error ignored (will rely on local fallback eventually)
             } catch (e) {
-                loadLocalVisits(); 
+                loadLocalVisits(); // 실패 시 로컬 카운트 사용
             }
         }
 
+        // 로컬 데이터 처리
         function loadLocalGuestbook() {
             const msgs = JSON.parse(localStorage.getItem('local_guestbook') || '[]');
             const list = document.getElementById('msg-list');
@@ -350,7 +362,7 @@
         window.deleteMsg = async (id, type) => {
             if (!confirm("이 메시지를 삭제하시겠습니까?")) return;
             
-            if (type === 'firebase' && db) {
+            if (type === 'firebase' && db && !isLocalMode) {
                 try {
                     await deleteDoc(doc(db, "guestbook", id));
                 } catch (e) {
@@ -377,7 +389,7 @@
                         name: name, msg: msg, timestamp: new Date()
                     });
                 } catch (e) {
-                    alert("전송 실패. 로컬 모드로 전환합니다.");
+                    // 전송 실패 시 로컬 모드 전환 및 저장
                     enableLocalMode(e.message);
                     saveToLocal(name, msg);
                 }
