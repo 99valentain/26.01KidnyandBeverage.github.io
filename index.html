@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 연구노트: 음료와 신장 건강 (Modern Navy Ver.)</title>
+    <title>2026 음료와 신장 건강 (Modern Navy Ver.)</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -66,7 +66,7 @@
             <div class="flex gap-2 overflow-x-auto hide-scrollbar px-4 pb-2 mt-2 border-t border-slate-50 pt-2">
                 <a href="#lab" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-sky-600 bg-sky-50 rounded-full hover:bg-sky-100 transition">실험실</a>
                 <a href="#chat" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-slate-600 bg-slate-50 rounded-full hover:bg-slate-100 transition">AI 하늘씨</a>
-                <a href="#guestbook" class="whitespace-nowrap px-3 py-1.5 text-sm font-bold text-emerald-600 bg-emerald-50 rounded-full hover:bg-emerald-100 transition">📝 방명록</a>
+                
             </div>
         </div>
     </nav>
@@ -86,11 +86,11 @@
                     </div>
                     <h2 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight tracking-tight">
                         한국인의 <span class="text-sky-300">음료 섭취</span>,<br>
-                        신장에 약일까?
+                        신장에 어떤 영향을 미칠까?
                     </h2>
                     <p class="text-slate-300 text-sm leading-relaxed font-light">
                         블랙커피 vs 믹스커피, 그리고 차와 가당음료.<br>
-                        당신의 선택이 콩팥 건강을 좌우합니다.<br>
+                        당신의 선택이 신장 건강을 좌우합니다.<br>
                         <span class="text-xs text-slate-400 mt-2 block opacity-80">Data Source: KNHANES 2024-2025</span>
                     </p>
                 </div>
@@ -189,7 +189,7 @@
                 <div class="flex gap-3">
                     <div class="flex-shrink-0 w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center text-lg">👩‍🔬</div>
                     <div class="bg-slate-50 p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm text-sm text-slate-700 max-w-[90%] chat-content">
-                        안녕하세요! <strong>AI 하늘씨.</strong>입니다.<br>궁금한 점을 물어보시면 데이터를 기반으로 답변해 드려요!
+                        안녕하세요! <strong>AI 하늘</strong>입니다.<br>궁금한 점을 물어보시면 데이터를 기반으로 답변해 드려요! (하지만, AI의 할루시네이션을 조심하십쇼.. 질문을 할 때마다 직업이 바뀌고 어쩌구.. 재미로만 보십쇼)
                     </div>
                 </div>
             </div>
@@ -199,35 +199,8 @@
             </div>
         </section>
 
-        <!-- 섹션 4: 공유 방명록 -->
-        <section id="guestbook" class="mobile-card bg-white p-6 border border-emerald-100 shadow-lg relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
-            
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-                    📝 방명록
-                </h3>
-                <span id="db-status" class="text-[10px] text-slate-400 bg-slate-100 px-2 py-1 rounded-full flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span> 연결 중...
-                </span>
-            </div>
-            
-            <!-- 메시지 목록 -->
-            <div id="msg-list" class="space-y-3 mb-4 h-[250px] overflow-y-auto bg-slate-50 p-4 rounded-2xl border border-slate-100 scroll-smooth">
-                <p class="text-xs text-center text-slate-400 py-8">데이터를 불러오는 중입니다...</p>
-            </div>
-
-            <!-- 작성 폼 -->
-            <form id="guest-form" class="space-y-2">
-                <div class="grid grid-cols-3 gap-2">
-                    <input type="text" id="g-name" placeholder="닉네임" class="col-span-1 w-full text-sm p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500" required>
-                    <input type="text" id="g-msg" placeholder="응원의 한마디!" class="col-span-2 w-full text-sm p-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500" required>
-                </div>
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-md active:scale-95 flex justify-center items-center gap-2">
-                    등록하기 🖊️
-                </button>
-            </form>
-        </section>
+        
+                   
 
         <!-- 푸터 -->
         <section class="text-center pt-8 pb-10">
@@ -393,7 +366,7 @@
             { limit: 30, icon: "🤮", title: "위험해요!", color: "bg-rose-600", desc: "신장 과부하 상태입니다!" },
             { limit: 60, icon: "😵‍💫", title: "부담스러워요", color: "bg-amber-500", desc: "당분 섭취가 너무 많아요." },
             { limit: 85, icon: "🙂", title: "양호함", color: "bg-blue-500", desc: "수분 섭취 좋아요." },
-            { limit: 101, icon: "🫘", title: "최상의 컨디션", color: "bg-emerald-500", desc: "항산화 성분 가득!" }
+            { limit: 101, icon: "💗", title: "최상의 컨디션", color: "bg-emerald-500", desc: "항산화 성분 가득!" }
         ];
 
         window.addDrink = (t) => { counts[t]++; updateUI(t); };
