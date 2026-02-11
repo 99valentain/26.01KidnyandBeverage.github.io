@@ -1,114 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 연구노트 (Snowy Yellow)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+/* 벚꽃 스타일 스크립트 */
+function createSakura() {
+    const petal = document.createElement('div');
+    petal.innerHTML = '🌸'; // 또는 '🍃'
+    petal.style.position = 'fixed';
+    petal.style.top = '-10px';
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.fontSize = (Math.random() * 10 + 10) + 'px';
+    petal.style.opacity = Math.random();
+    petal.style.zIndex = '9999';
+    petal.style.pointerEvents = 'none';
+    
+    // 살랑살랑 흔들리는 애니메이션
+    const duration = Math.random() * 3 + 5;
+    petal.animate([
+        { transform: `translateX(0) translateY(0) rotate(0deg)` },
+        { transform: `translateX(${Math.random() * 100 - 50}px) translateY(110vh) rotate(${Math.random() * 720}deg)` }
+    ], { duration: duration * 1000, easing: 'linear' });
 
-    <style>
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background: linear-gradient(135deg, #FEF9C3 0%, #FFEFD5 100%); /* 부드러운 노랑 그라데이션 */
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .mobile-card { border-radius: 1.5rem; background: rgba(255, 255, 255, 0.9); backdrop-blur: 10px; border: 1px solid rgba(253, 224, 71, 0.3); }
-        
-        /* 눈송이 스타일 */
-        .snowflake {
-            position: fixed; top: -10px; z-index: 9999; user-select: none; pointer-events: none;
-            color: white; font-size: 1.5rem; opacity: 0.8;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(110vh) rotate(360deg); }
-        }
-    </style>
-</head>
-<body class="pb-20">
-    <!-- 눈송이 생성 스크립트 -->
-    <script>
-        function createSnow() {
-            const snow = document.createElement('div');
-            snow.innerHTML = '❄';
-            snow.classList.add('snowflake');
-            snow.style.left = Math.random() * 100 + 'vw';
-            snow.style.animationDuration = (Math.random() * 3 + 4) + 's'; // 4~7초
-            snow.style.opacity = Math.random();
-            snow.style.fontSize = (Math.random() * 10 + 10) + 'px';
-            document.body.appendChild(snow);
-            setTimeout(() => snow.remove(), 7000);
-        }
-        setInterval(createSnow, 200);
-    </script>
-
-    <nav class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-yellow-200">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <span class="text-2xl">🫘</span>
-                <h1 class="font-bold text-yellow-800 text-lg">2026 연구노트</h1>
-            </div>
-        </div>
-    </nav>
-
-    <main class="max-w-3xl mx-auto px-4 py-6 space-y-12 relative z-10">
-        <!-- 섹션 1: 연구 개요 -->
-        <section class="mobile-card p-7 shadow-xl shadow-yellow-200/50">
-            <div class="inline-block px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-[10px] font-extrabold mb-4">2026.01 PROJECT</div>
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 leading-tight">
-                한국인의 <span class="text-yellow-600">음료 섭취</span>,<br>신장에 약일까?
-            </h2>
-            <div class="bg-yellow-50 p-6 rounded-2xl border border-yellow-100">
-                <h3 class="text-[10px] font-bold text-yellow-700 uppercase mb-4">Analysis Info</h3>
-                <div class="space-y-4">
-                    <div class="flex justify-between text-xs"><span class="text-yellow-800">분석 데이터</span><span class="font-bold">KNHANES</span></div>
-                    <div class="w-full bg-yellow-200 h-1.5 rounded-full overflow-hidden"><div class="bg-yellow-500 h-full w-full"></div></div>
-                    <div class="flex gap-1 h-2 mt-4">
-                        <div class="bg-slate-400 w-1/4 rounded-l-full"></div>
-                        <div class="bg-emerald-400 w-1/4"></div>
-                        <div class="bg-yellow-400 w-1/4"></div>
-                        <div class="bg-rose-400 w-1/4 rounded-r-full"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 섹션 2: 신장 다마고치 -->
-        <section id="lab" class="mobile-card p-6 border border-yellow-100">
-            <div class="text-center mb-6"><h2 class="text-2xl font-bold text-slate-900">🧪 내 신장 다마고치</h2></div>
-            <div class="bg-white/50 rounded-2xl p-6 flex flex-col items-center justify-center mb-6 border border-yellow-50">
-                <div id="kidney-char" class="text-[80px] mb-3 animate__animated animate__pulse animate__infinite">🫘</div>
-                <div class="w-full mt-5 bg-yellow-100 rounded-full h-2.5 overflow-hidden">
-                    <div id="health-bar" class="bg-emerald-500 h-full w-full transition-all duration-700"></div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-                <button onclick="addDrink('tea')" class="bg-white p-3 rounded-xl border border-yellow-100 font-bold text-sm">🍵 차</button>
-                <button onclick="addDrink('black')" class="bg-white p-3 rounded-xl border border-yellow-100 font-bold text-sm">☕ 커피</button>
-            </div>
-        </section>
-
-        <!-- 섹션 3: AI 하늘씨 -->
-        <section id="chat" class="mobile-card h-[400px] flex flex-col overflow-hidden">
-            <div class="p-4 bg-yellow-50 font-bold border-b border-yellow-100">👩‍🔬 AI 하늘씨.</div>
-            <div id="chat-window" class="flex-1 p-4 overflow-y-auto text-sm space-y-4"></div>
-            <div class="p-4 bg-white border-t border-yellow-100 flex gap-2">
-                <input type="text" id="chat-input" class="w-full bg-yellow-50 rounded-xl px-4 border-0 focus:ring-2 focus:ring-yellow-400">
-                <button onclick="handleChat()" class="bg-yellow-500 text-white px-4 py-2 rounded-xl">전송</button>
-            </div>
-        </section>
-
-        <footer class="text-center text-yellow-700 text-[11px] leading-relaxed pb-10">
-            © 2026 하늘씨 : AI가 거짓말을 아주 잘해서요..<br>거짓 정보가 다수 있을 수 있으니 주의하시기 바랍니다.
-        </footer>
-    </main>
-
-    <script>
-        const GEMINI_API_KEY = "AIzaSyDUbyxJarLwFPXHnM7y3nSSeNdrJ0-BSSU";
-        const counts = { black: 0, tea: 0 };
-        function addDrink(t) { counts[t]++; updateUI()
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), duration * 1000);
+}
+setInterval(createSakura, 300); // 벚꽃 생성 간격
