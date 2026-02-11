@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 연구노트: 커피와 신장 건강 상호작용 대시보드 (AI Powered)</title>
+    
+    <!-- Tailwind CSS (Styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js (Visualization) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- CSS Configuration -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #FDFBF7; /* Warm neutral background */
+            color: #2D3748;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A0AEC0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+
+        /* Chart Container Styling (Mandatory) */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        .card-hover {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* AI Loading Animation */
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #3B82F6;
+            border-radius: 50%;
+            animation: typing 1s infinite;
+            margin: 0 2px;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-5px); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation / Header -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">☕</span>
+                    <div>
+                        <h1 class="font-bold text-gray-900 leading-tight">2026 영양역학 연구노트 <span class="text-blue-500 text-xs ml-1 border border-blue-200 bg-blue-50 px-1 rounded">AI Powered</span></h1>
+                        <p class="text-xs text-gray-500">연구책임: 제유진 교수님 | 연구원: 조하늘</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">연구 개요</a>
+                    <a href="#analysis" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">성분 분석</a>
+                    <a href="#simulation" class="text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-sm font-bold">✨ AI 자가 진단</a>
+                    <a href="#ai-assistant" class="text-purple-600 hover:text-purple-800 px-3 py-2 rounded-md text-sm font-bold">🤖 AI 챗봇</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
+
+        <!-- SECTION 1: RESEARCH OVERVIEW (Hero) -->
+        <section id="overview" class="relative">
+            <div class="bg-gradient-to-r from-stone-800 to-stone-700 rounded-3xl p-8 md:p-12 text-white shadow-xl overflow-hidden">
+                <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="inline-block px-3 py-1 bg-yellow-500 text-yellow-900 rounded-full text-xs font-bold mb-4">2026년 1월 연구과제</div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
+                            신장기능과 음료와의 연관성.
+                        </h2>
+                        <p class="text-stone-300 text-lg mb-6 leading-relaxed">
+                            "블랙커피는 건강에 좋다"는 서구의 연구 결과,<br>
+                            과연 <strong>믹스커피</strong>를 즐기는 한국인에게도 유효할까요?<br>
+                            <br>
+                            본 연구는 국민건강영양조사(KNHANES) 데이터를 기반으로
+                            커피의 종류(Type)와 가당음료 섭취가 신장 기능(eGFR)에 미치는 영향을 분석합니다.
+                        </p>
+                        <div class="flex gap-4">
+                            <button onclick="document.getElementById('simulation').scrollIntoView({behavior: 'smooth'})" class="bg-white text-stone-800 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition shadow-lg flex items-center gap-2">
+                                <span>✨</span> AI 위험도 예측하기
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Abstract Visualization using CSS Grid/Flex -->
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                        <h3 class="text-sm font-bold text-stone-300 uppercase tracking-wider mb-4">Research Key Metrics</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">분석 데이터</span>
+                                <span class="font-mono font-bold text-yellow-400">KNHANES (국건영)</span>
+                            </div>
+                            <div class="w-full bg-stone-600 h-2 rounded-full overflow-hidden">
+                                <div class="bg-yellow-400 h-full" style="width: 100%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="text-sm">주요 타겟 변수</span>
+                                <span class="font-mono font-bold text-green-400">eGFR (사구체여과율)</span>
+                            </div>
+                            <div class="w-full bg-stone-600 h-2 rounded-full overflow-hidden">
+                                <div class="bg-green-400 h-full" style="width: 85%"></div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="text-sm">핵심 비교군</span>
+                                <span class="font-mono font-bold text-red-300">Black vs. Mix</span>
+                            </div>
+                            <div class="flex gap-1 h-2">
+                                <div class="bg-stone-900 w-1/2 rounded-l-full"></div>
+                                <div class="bg-orange-300 w-1/2 rounded-r-full"></div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-xs text-stone-400">
+                            * 본 연구는 당뇨병, 고혈압 등의 혼란변수를 보정한 다변량 분석을 수행합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: COMPARATIVE ANALYSIS (Chart.js) -->
+        <section id="analysis">
+            <div class="mb-8 border-l-4 border-stone-800 pl-4">
+                <h3 class="text-2xl font-bold text-gray-900">왜 '종류(Type)'가 중요한가?</h3>
+                <p class="text-gray-600 mt-2 max-w-3xl">
+                    기존 국외 연구(Gao et al., 2025 등)는 대부분 블랙커피 위주입니다. 
+                    한국인의 믹스커피 섭취 패턴은 <strong>설탕과 프림(포화지방)</strong> 섭취를 동반하므로, 
+                    커피 항산화 성분의 이점을 상쇄할 수 있다는 것이 본 연구의 핵심 가설입니다.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Chart 1: Nutrient Composition -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
+                    <h4 class="font-bold text-lg mb-2 text-center">커피 1잔당 영양 성분 추정치 비교</h4>
+                    <p class="text-xs text-center text-gray-500 mb-6">믹스커피의 당분과 지방 함량에 주목하세요.</p>
+                    <div class="chart-container">
+                        <canvas id="nutrientChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Hypothesis Trend -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
+                    <h4 class="font-bold text-lg mb-2 text-center">연구 가설: 섭취량에 따른 신장 위험도</h4>
+                    <p class="text-xs text-center text-gray-500 mb-6">블랙커피(보호 효과) vs 믹스커피(대사 위험 증가)</p>
+                    <div class="chart-container">
+                        <canvas id="hypothesisChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: INTERACTIVE SIMULATION & AI INSIGHT -->
+        <section id="simulation" class="bg-blue-50 rounded-3xl p-8 md:p-12">
+            <div class="text-center mb-10">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Interactive Lab + Gemini AI</span>
+                <h3 class="text-3xl font-bold text-gray-900 mt-4">나의 신장 건강 시뮬레이션</h3>
+                <p class="text-gray-600 mt-2">
+                    하루에 마시는 커피의 양을 조절해보세요. <br>
+                    <strong>Gemini AI</strong>가 귀하의 패턴을 분석하여 구체적인 건강 조언을 제공합니다.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                <!-- Input Controls -->
+                <div class="md:col-span-1 space-y-8 bg-white p-6 rounded-2xl shadow-md">
+                    <div>
+                        <label class="block text-sm font-bold text-stone-700 mb-2">
+                            ☕ 블랙 커피 (아메리카노 등)
+                            <span class="float-right text-stone-500 font-normal" id="val-black">0잔</span>
+                        </label>
+                        <input type="range" id="input-black" min="0" max="10" value="0" step="1" 
+                               class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-stone-700">
+                        <p class="text-xs text-stone-500 mt-1">항산화 성분(폴리페놀) 공급원</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-yellow-700 mb-2">
+                            🍬 믹스 커피 (자판기 등)
+                            <span class="float-right text-yellow-600 font-normal" id="val-mix">0잔</span>
+                        </label>
+                        <input type="range" id="input-mix" min="0" max="10" value="0" step="1" 
+                               class="w-full h-2 bg-yellow-100 rounded-lg appearance-none cursor-pointer accent-yellow-500">
+                        <p class="text-xs text-stone-500 mt-1">당분 및 포화지방 함유</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100">
+                        <div class="flex items-center gap-2 mb-2">
+                             <input type="checkbox" id="check-diabetes" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                             <label for="check-diabetes" class="text-sm text-gray-700">당뇨병 병력 있음 (위험 가중)</label>
+                        </div>
+                        <p class="text-xs text-gray-400">당뇨 환자는 혈당 조절 문제로 믹스커피의 영향이 더 클 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <!-- Visualization Output with AI -->
+                <div class="md:col-span-2 space-y-4">
+                    <!-- Standard Results -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center justify-center min-h-[250px]">
+                        <h4 class="text-lg font-bold text-gray-700 mb-6">기본 예측 분석 결과</h4>
+                        
+                        <div class="w-full max-w-md relative">
+                            <!-- Custom Gauge Bar -->
+                            <div class="h-8 w-full bg-gray-200 rounded-full overflow-hidden relative">
+                                <!-- Background Gradients -->
+                                <div class="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-500 opacity-30"></div>
+                                
+                                <!-- Indicator -->
+                                <div id="risk-indicator" class="absolute top-0 h-full w-2 bg-slate-800 border-2 border-white shadow-lg transition-all duration-500 ease-out" style="left: 0%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400 mt-2 font-mono">
+                                <span>안전 (Beneficial)</span>
+                                <span>주의 (Caution)</span>
+                                <span>위험 (Risk)</span>
+                            </div>
+                        </div>
+
+                        <div id="result-text" class="mt-8 text-center animate-pulse">
+                            <p class="text-4xl font-black text-gray-300">0</p>
+                            <p class="text-sm text-gray-400">섭취량을 입력해주세요</p>
+                        </div>
+                    </div>
+
+                    <!-- Gemini AI Insight Box -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl shadow-md border border-indigo-100">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-bold text-indigo-900 flex items-center gap-2">
+                                <span>✨</span> Gemini AI 맞춤 분석
+                            </h4>
+                            <button id="btn-get-insight" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-lg shadow transition flex items-center gap-2">
+                                분석 실행하기
+                            </button>
+                        </div>
+                        <div id="ai-insight-content" class="text-sm text-gray-700 leading-relaxed min-h-[80px] flex items-center justify-center bg-white/50 rounded-lg p-4">
+                            <span class="text-gray-400">위 버튼을 누르면 Gemini가 귀하의 섭취 패턴을 분석하여 구체적인 조언을 제공합니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: AI RESEARCH ASSISTANT (CHATBOT) -->
+        <section id="ai-assistant">
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-1">
+                        <div class="inline-block p-3 bg-purple-100 text-purple-600 rounded-xl mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">AI 연구원에게 질문하기</h3>
+                        <p class="text-gray-500 text-sm mb-6">
+                            2026년 연구노트의 내용, 커피와 신장의 관계, 혹은 영양역학적 궁금증을 물어보세요. Gemini가 연구원의 페르소나로 답변합니다.
+                        </p>
+                        <div class="space-y-2">
+                            <button class="text-left w-full p-3 text-xs bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-600 transition" onclick="setQuestion('믹스커피가 왜 신장에 안 좋은가요?')">
+                                "믹스커피가 왜 신장에 안 좋은가요?"
+                            </button>
+                            <button class="text-left w-full p-3 text-xs bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-600 transition" onclick="setQuestion('블랙커피는 하루 몇 잔이 적당한가요?')">
+                                "블랙커피는 하루 몇 잔이 적당한가요?"
+                            </button>
+                            <button class="text-left w-full p-3 text-xs bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-600 transition" onclick="setQuestion('eGFR 수치가 무엇인가요?')">
+                                "eGFR 수치가 무엇인가요?"
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 flex flex-col h-[400px] bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden">
+                        <!-- Chat History -->
+                        <div id="chat-history" class="flex-1 p-6 overflow-y-auto space-y-4">
+                            <div class="flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">AI</div>
+                                <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-gray-700 border border-gray-100 max-w-[80%]">
+                                    안녕하세요! 저는 조하늘 연구원의 연구를 돕는 AI 어시스턴트입니다. 무엇이 궁금하신가요?
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Input Area -->
+                        <div class="p-4 bg-white border-t border-gray-200">
+                            <div class="flex gap-2">
+                                <input type="text" id="chat-input" placeholder="질문을 입력하세요..." class="flex-1 p-3 bg-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm">
+                                <button onclick="sendChat()" id="btn-send-chat" class="p-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-md transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: METHODOLOGY & REFERENCES -->
+        <section id="methodology">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Methodology Card -->
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">연구 진행 프로세스 (Methodology)</h3>
+                    <div class="space-y-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold">1</div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900">데이터 추출 및 정제</h4>
+                                <p class="text-gray-500 text-sm">국민건강영양조사(KNHANES) 데이터 중 만 19세~64세 성인 대상. eGFR 및 식품섭취빈도조사(FFQ) 데이터 결측치 제거.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold">2</div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900">그룹 분류 (Categorization)</h4>
+                                <p class="text-gray-500 text-sm">
+                                    1. 비섭취군<br>
+                                    2. 블랙커피군 (아메리카노, 원두)<br>
+                                    3. 믹스커피군 (설탕+프림 포함)<br>
+                                    4. 기타 가당음료군
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold">3</div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900">통계 분석 (Statistical Analysis)</h4>
+                                <p class="text-gray-500 text-sm">
+                                    다변량 로지스틱 회귀분석(Multivariate Logistic Regression). <br>
+                                    보정 변수: 연령, 성별, BMI, 흡연, 음주, 고혈압, 당뇨병, 총 에너지 섭취량 등.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- References Card -->
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-100">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">주요 참고 문헌</h3>
+                    <ul class="space-y-3 text-xs text-gray-600">
+                        <li class="pl-3 border-l-2 border-stone-300">
+                            <strong>Gao et al. (2025)</strong><br>
+                            Association between coffee/caffeine and CKD (Sci Rep).
+                        </li>
+                        <li class="pl-3 border-l-2 border-stone-300">
+                            <strong>Jhee et al.</strong><br>
+                            Effects of Coffee Intake on Incident CKD (Am J Med).
+                        </li>
+                        <li class="pl-3 border-l-2 border-stone-300">
+                            <strong>Shin et al. (2018)</strong><br>
+                            한국 성인에서 커피 섭취와 eGFR의 연관성 (KJFP).
+                        </li>
+                        <li class="pl-3 border-l-2 border-stone-300">
+                            <strong>KNHANES</strong><br>
+                            질병관리청 국민건강영양조사 원시자료 지침.
+                        </li>
+                    </ul>
+                    <div class="mt-6 pt-4 border-t border-stone-200">
+                         <p class="text-xs font-bold text-stone-500">연구자 메모:</p>
+                         <p class="text-xs text-stone-400 mt-1">"서구 연구 결과와 한국의 현실 사이의 간극을 메우는 것이 이 연구의 핵심입니다." - 조하늘</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="font-bold text-stone-100">경희대학교 식품영양학과 영양역학 연구실</p>
+            <p class="text-sm mt-2">2026년 1월 연구노트 기반 프로토타입</p>
+            <p class="text-xs mt-8 opacity-50">본 웹사이트는 연구 목적으로 제작되었으며, 의학적 진단을 대신할 수 없습니다.</p>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // --- System Configuration for Gemini API ---
+        const apiKey = ""; // System provides this at runtime
+        
+        async function callGeminiAPI(userPrompt, systemInstruction) {
+            if (!apiKey) {
+                console.error("API Key not found");
+                return "API Key Error: 환경 설정이 올바르지 않습니다.";
+            }
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                return "죄송합니다. AI 서비스 연결에 실패했습니다. 잠시 후 다시 시도해주세요.";
+            }
+        }
+
+        // --- State Management ---
+        const state = {
+            blackCups: 0,
+            mixCups: 0,
+            hasDiabetes: false
+        };
+
+        // --- Chart Initialization (Same as before) ---
+        function initCharts() {
+            // Chart 1: Nutrient Composition
+            const ctxNutrient = document.getElementById('nutrientChart').getContext('2d');
+            new Chart(ctxNutrient, {
+                type: 'bar',
+                data: {
+                    labels: ['블랙 커피 (1잔)', '믹스 커피 (1봉)'],
+                    datasets: [
+                        { label: '카페인 (mg)', data: [70, 50], backgroundColor: '#4B3621' },
+                        { label: '당류 (g)', data: [0, 6], backgroundColor: '#F59E0B' },
+                        { label: '포화지방 (g)', data: [0, 1.5], backgroundColor: '#EF4444' }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: '함량' } } },
+                    plugins: { tooltip: { callbacks: { footer: (items) => items[0].label.includes('믹스') ? '당분과 프림이 주요 변수입니다.' : '순수 커피 추출물 위주입니다.' } } }
+                }
+            });
+
+            // Chart 2: Hypothesis Trend
+            const ctxHypo = document.getElementById('hypothesisChart').getContext('2d');
+            new Chart(ctxHypo, {
+                type: 'line',
+                data: {
+                    labels: ['0잔', '1잔', '2잔', '3잔', '4잔 이상'],
+                    datasets: [
+                        { label: '블랙 커피', data: [100, 102, 103, 101, 98], borderColor: '#10B981', backgroundColor: '#10B981', tension: 0.4 },
+                        { label: '믹스 커피', data: [100, 98, 95, 90, 85], borderColor: '#EF4444', backgroundColor: '#EF4444', borderDash: [5, 5], tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { y: { title: { display: true, text: '신장 건강 점수' }, suggestedMin: 80, suggestedMax: 110 } }
+                }
+            });
+        }
+
+        // --- Simulation Logic ---
+        function updateSimulation() {
+            const inputBlack = document.getElementById('input-black');
+            const inputMix = document.getElementById('input-mix');
+            const valBlack = document.getElementById('val-black');
+            const valMix = document.getElementById('val-mix');
+            const checkDia = document.getElementById('check-diabetes');
+            const indicator = document.getElementById('risk-indicator');
+            const resultText = document.getElementById('result-text');
+
+            state.blackCups = parseInt(inputBlack.value);
+            state.mixCups = parseInt(inputMix.value);
+            state.hasDiabetes = checkDia.checked;
+
+            valBlack.textContent = `${state.blackCups}잔`;
+            valMix.textContent = `${state.mixCups}잔`;
+
+            // Simple Score Logic
+            let score = 50; 
+            if (state.blackCups <= 3) score += (state.blackCups * 3);
+            else score += (9) - ((state.blackCups - 3) * 2);
+
+            let mixPenalty = state.mixCups * 5;
+            if (state.hasDiabetes) mixPenalty *= 1.5;
+            score -= mixPenalty;
+
+            let visualPercent = Math.max(0, Math.min(100, score));
+            indicator.style.left = `${visualPercent}%`;
+
+            let riskLevel = "", colorClass = "";
+            if (visualPercent >= 60) { riskLevel = "양호 (Good)"; colorClass = "text-green-500"; }
+            else if (visualPercent >= 35) { riskLevel = "주의 (Caution)"; colorClass = "text-yellow-500"; }
+            else { riskLevel = "위험 (High Risk)"; colorClass = "text-red-500"; }
+
+            resultText.innerHTML = `<p class="text-4xl font-black ${colorClass}">${riskLevel}</p><p class="text-sm text-gray-400 mt-2">Kidney Stress Score: ${100 - visualPercent}</p>`;
+        }
+
+        // --- Gemini Feature 1: Get AI Insight ---
+        async function getAIInsight() {
+            const btn = document.getElementById('btn-get-insight');
+            const contentDiv = document.getElementById('ai-insight-content');
+            
+            // UI Loading State
+            btn.disabled = true;
+            btn.innerHTML = `<span class="typing-indicator"><span></span><span></span><span></span></span> 분석 중...`;
+            contentDiv.innerHTML = "Gemini가 데이터를 분석하고 있습니다...";
+
+            const prompt = `
+                사용자 데이터:
+                - 블랙커피 섭취량: 하루 ${state.blackCups}잔
+                - 믹스커피 섭취량: 하루 ${state.mixCups}잔
+                - 당뇨병 유무: ${state.hasDiabetes ? '있음' : '없음'}
+
+                역할: 영양역학 연구원 조하늘.
+                지시사항: 위 데이터를 바탕으로 이 사람의 신장 건강에 대한 짧은(3문장 내외) 조언을 한국어로 작성해주세요.
+                참고 가설: 블랙커피는 항산화 효과가 있을 수 있으나, 믹스커피의 설탕과 프림은 대사증후군을 유발하여 eGFR을 낮출 위험이 있음. 당뇨가 있으면 위험이 가중됨.
+                톤앤매너: 전문적이지만 친절하게.
+            `;
+
+            const response = await callGeminiAPI(prompt, "당신은 영양역학 전문가입니다.");
+            
+            // Render Result
+            contentDiv.innerHTML = `<strong>AI 분석 결과:</strong><br>${response}`;
+            btn.innerHTML = "다시 분석하기";
+            btn.disabled = false;
+        }
+
+        // --- Gemini Feature 2: AI Chatbot ---
+        function setQuestion(q) {
+            document.getElementById('chat-input').value = q;
+        }
+
+        async function sendChat() {
+            const inputEl = document.getElementById('chat-input');
+            const historyEl = document.getElementById('chat-history');
+            const btn = document.getElementById('btn-send-chat');
+            const message = inputEl.value.trim();
+
+            if (!message) return;
+
+            // 1. Add User Message
+            historyEl.innerHTML += `
+                <div class="flex gap-3 justify-end">
+                    <div class="bg-purple-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[80%]">
+                        ${message}
+                    </div>
+                </div>`;
+            inputEl.value = '';
+            historyEl.scrollTop = historyEl.scrollHeight;
+
+            // 2. Loading State
+            btn.disabled = true;
+            const loadingId = 'loading-' + Date.now();
+            historyEl.innerHTML += `
+                <div id="${loadingId}" class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">AI</div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-gray-700 border border-gray-100">
+                        <div class="typing-indicator"><span></span><span></span><span></span></div>
+                    </div>
+                </div>`;
+            historyEl.scrollTop = historyEl.scrollHeight;
+
+            // 3. Call Gemini
+            const systemPrompt = "당신은 경희대학교 영양역학 연구실의 조하늘 연구원입니다. 2026년 1월 연구노트를 바탕으로 한국인의 커피 섭취와 신장 건강(eGFR)의 관계에 대해 설명해주는 AI 어시스턴트입니다. 믹스커피의 위험성과 블랙커피의 잠재적 이점에 대해 균형 잡힌 시각으로 답변하세요.";
+            const response = await callGeminiAPI(message, systemPrompt);
+
+            // 4. Update UI
+            document.getElementById(loadingId).remove();
+            historyEl.innerHTML += `
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">AI</div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-gray-700 border border-gray-100 max-w-[90%] leading-relaxed">
+                        ${response}
+                    </div>
+                </div>`;
+            
+            historyEl.scrollTop = historyEl.scrollHeight;
+            btn.disabled = false;
+        }
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            ['input-black', 'input-mix', 'check-diabetes'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updateSimulation);
+            });
+            updateSimulation();
+
+            // AI Buttons
+            document.getElementById('btn-get-insight').addEventListener('click', getAIInsight);
+            
+            // Enter key for chat
+            document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendChat();
+            });
+        });
+
+    </script>
+</body>
+</html>
